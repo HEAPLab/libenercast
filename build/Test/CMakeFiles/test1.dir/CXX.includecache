@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/calculator.h
+
+../include/salutator.h
+
+/home/lia/libEnTris3/Test/test1.cpp
+iostream
+-
+calculator.h
+/home/lia/libEnTris3/Test/calculator.h
+salutator.h
+/home/lia/libEnTris3/Test/salutator.h
+
