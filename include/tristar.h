@@ -1,18 +1,13 @@
-#include <iostream>
 #include <modbus.h>
 #include <string>
+#include "chargeController.h"
 
-#define BAUD 9600
-#define PARITY 'N'
-#define DATA_BIT 8
-#define STOP_BIT 2
 
-class tristar : public chargeController
-{
+class tristar : public chargeController{
 private:
     modbus_t *ctx;
 public:
-    tristar(std::string device);
-    ~tristar();
-    int getVolt()
+    tristar(const std::string & device);
+    virtual ~tristar();
+    virtual int getVolt() const override;
 };

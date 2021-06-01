@@ -1,17 +1,12 @@
+#ifndef CHARGECONTROLLER_H
+#define CHARGECONTROLLER_H
 class chargeController
 {
 private:
     
 public:
-    chargeController();
-    ~chargeController();
-    virtual int getVolt() = 0;
+    virtual ~chargeController() {}
+    virtual int getVolt() const = 0;
 };
 
-chargeController::chargeController()
-{
-}
-
-chargeController::~chargeController()
-{
-}
+#endif
