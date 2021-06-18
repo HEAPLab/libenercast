@@ -90,7 +90,8 @@ main_EXTERNAL_OBJECTS =
 
 test/main: test/CMakeFiles/main.dir/main.cpp.o
 test/main: test/CMakeFiles/main.dir/build.make
-test/main: src/libsrc.a
+test/main: src/libtristar.a
+test/main: src/libepever.a
 test/main: test/CMakeFiles/main.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/lcagnizi/enercastlib/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable main"
 	cd /home/lcagnizi/enercastlib/build/test && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/main.dir/link.txt --verbose=$(VERBOSE)

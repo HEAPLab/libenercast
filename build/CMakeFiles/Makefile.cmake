@@ -46,6 +46,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "src/CMakeFiles/src.dir/DependInfo.cmake"
+  "src/CMakeFiles/tristar.dir/DependInfo.cmake"
+  "src/CMakeFiles/epever.dir/DependInfo.cmake"
   "test/CMakeFiles/main.dir/DependInfo.cmake"
   )

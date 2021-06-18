@@ -1,8 +1,9 @@
 /home/lcagnizi/enercastlib/build/CMakeFiles/rebuild_cache.dir
 /home/lcagnizi/enercastlib/build/CMakeFiles/edit_cache.dir
 /home/lcagnizi/enercastlib/build/src/CMakeFiles/rebuild_cache.dir
-/home/lcagnizi/enercastlib/build/src/CMakeFiles/src.dir
 /home/lcagnizi/enercastlib/build/src/CMakeFiles/edit_cache.dir
+/home/lcagnizi/enercastlib/build/src/CMakeFiles/tristar.dir
+/home/lcagnizi/enercastlib/build/src/CMakeFiles/epever.dir
 /home/lcagnizi/enercastlib/build/test/CMakeFiles/rebuild_cache.dir
 /home/lcagnizi/enercastlib/build/test/CMakeFiles/main.dir
 /home/lcagnizi/enercastlib/build/test/CMakeFiles/edit_cache.dir

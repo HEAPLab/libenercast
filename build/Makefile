@@ -111,17 +111,30 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named src
+# Target rules for targets named tristar
 
 # Build rule for target.
-src: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 src
-.PHONY : src
+tristar: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 tristar
+.PHONY : tristar
 
 # fast build rule for target.
-src/fast:
-	$(MAKE) -f src/CMakeFiles/src.dir/build.make src/CMakeFiles/src.dir/build
-.PHONY : src/fast
+tristar/fast:
+	$(MAKE) -f src/CMakeFiles/tristar.dir/build.make src/CMakeFiles/tristar.dir/build
+.PHONY : tristar/fast
+
+#=============================================================================
+# Target rules for targets named epever
+
+# Build rule for target.
+epever: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 epever
+.PHONY : epever
+
+# fast build rule for target.
+epever/fast:
+	$(MAKE) -f src/CMakeFiles/epever.dir/build.make src/CMakeFiles/epever.dir/build
+.PHONY : epever/fast
 
 #=============================================================================
 # Target rules for targets named main
@@ -144,7 +157,8 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... src"
+	@echo "... tristar"
+	@echo "... epever"
 	@echo "... main"
 .PHONY : help
 

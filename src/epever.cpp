@@ -22,3 +22,27 @@ epever::~epever()
     modbus_close(ctx);
     modbus_free(ctx);
 }
+float epever::getBatteryVoltage() const {
+    uint16_t dest[16];
+    modbus_set_debug(ctx,TRUE);
+    if(modbus_read_input_registers(ctx, 0x331A, 1, dest)==-1){
+        std::cout<<modbus_strerror(errno)<<std::endl;
+        modbus_free(ctx);
+    }else{
+        return dest[0];
+    }
+}
+    float epever::getChargeCurrent() const {return 0;};
+    float epever::getLoadCurrent() const {return 0;};
+    float epever::getControlMode() const {return 0;};
+    float epever::getHeatsinkTemp() const {return 0;};
+    float epever::getBatteryTemp() const {return 0;};
+    float epever::getRegulationVoltage() const {return 0;};
+    float epever::getAlarmLo() const {return 0;};
+    float epever::getFault() const {return 0;};
+
+    float epever::getVoltageDisconnect() const {return 0;};
+    void epever::setVoltageDisconnect(float v) const {};
+    float epever::getVoltageReconnect() const {return 0;};
+    void epever::setVoltageReconnect(float v) const {};
+    void epever::clearFaults() const {};

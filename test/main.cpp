@@ -1,13 +1,18 @@
 #include "chargeController.h"
 #include "tristar.h"
+#include "epever.h"
 #include <iostream>
 int main(int argc, char const *argv[])
 {
     chargeController *device = new tristar("/dev/ttyUSB0");
     float battVoltage = device->getBatteryVoltage();
-    std::cout<<"battery Voltage: "<<battVoltage<<std::endl;
+    std::cout<<"battery Voltage Tristar: "<<battVoltage<<std::endl;
 
-    float solarCurrent = device->getChargeCurrent();
+    chargeController *deviceE = new epever("/dev/ttyXRUSB0");
+    float battVoltageE = deviceE->getBatteryVoltage();
+    std::cout<<"battery Voltage Epever: "<<battVoltageE<<std::endl;
+
+    /*float solarCurrent = device->getChargeCurrent();
     std::cout<<"charge/solar current: " <<solarCurrent<<std::endl;
 
     float loadCurrent = device->getLoadCurrent();
@@ -35,7 +40,7 @@ int main(int argc, char const *argv[])
     std::cout<<"voltage disconnect: "<<voltageDisconnect<<std::endl;
     
     float voltageRec = device->getVoltageReconnect();
-    std::cout<<"voltage reconnect: "<<voltageRec<<std::endl;
+    std::cout<<"voltage reconnect: "<<voltageRec<<std::endl;*/
 
     //device->setVoltageReconnect(13.008);
 
@@ -43,8 +48,8 @@ int main(int argc, char const *argv[])
     //std::cout<<"voltage reconnect: "<<voltageRec<<std::endl;
 
     //device->clearFaults();
-    fault = device->getFault();
-    std::cout<<"fault: "<<fault<<std::endl;
+    //fault = device->getFault();
+    //std::cout<<"fault: "<<fault<<std::endl;
     
     return 0;
 }

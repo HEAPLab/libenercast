@@ -16,23 +16,11 @@ string
 chargeController.h
 ../include/chargeController.h
 
-../include/tristar.h
-modbus.h
--
-string
--
-chargeController.h
-../include/chargeController.h
-
-/home/lcagnizi/enercastlib/test/main.cpp
-chargeController.h
-/home/lcagnizi/enercastlib/test/chargeController.h
-tristar.h
-/home/lcagnizi/enercastlib/test/tristar.h
-epever.h
-/home/lcagnizi/enercastlib/test/epever.h
+/home/lcagnizi/enercastlib/src/epever.cpp
 iostream
 -
+epever.h
+/home/lcagnizi/enercastlib/src/epever.h
 
 /usr/include/modbus/modbus-rtu.h
 modbus.h

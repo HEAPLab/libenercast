@@ -111,19 +111,61 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-src/CMakeFiles/src.dir/rule:
-	cd /home/lcagnizi/enercastlib/build && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/src.dir/rule
-.PHONY : src/CMakeFiles/src.dir/rule
+src/CMakeFiles/tristar.dir/rule:
+	cd /home/lcagnizi/enercastlib/build && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/tristar.dir/rule
+.PHONY : src/CMakeFiles/tristar.dir/rule
 
 # Convenience name for target.
-src: src/CMakeFiles/src.dir/rule
+tristar: src/CMakeFiles/tristar.dir/rule
 
-.PHONY : src
+.PHONY : tristar
 
 # fast build rule for target.
-src/fast:
-	cd /home/lcagnizi/enercastlib/build && $(MAKE) -f src/CMakeFiles/src.dir/build.make src/CMakeFiles/src.dir/build
-.PHONY : src/fast
+tristar/fast:
+	cd /home/lcagnizi/enercastlib/build && $(MAKE) -f src/CMakeFiles/tristar.dir/build.make src/CMakeFiles/tristar.dir/build
+.PHONY : tristar/fast
+
+# Convenience name for target.
+src/CMakeFiles/epever.dir/rule:
+	cd /home/lcagnizi/enercastlib/build && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/epever.dir/rule
+.PHONY : src/CMakeFiles/epever.dir/rule
+
+# Convenience name for target.
+epever: src/CMakeFiles/epever.dir/rule
+
+.PHONY : epever
+
+# fast build rule for target.
+epever/fast:
+	cd /home/lcagnizi/enercastlib/build && $(MAKE) -f src/CMakeFiles/epever.dir/build.make src/CMakeFiles/epever.dir/build
+.PHONY : epever/fast
+
+epever.o: epever.cpp.o
+
+.PHONY : epever.o
+
+# target to build an object file
+epever.cpp.o:
+	cd /home/lcagnizi/enercastlib/build && $(MAKE) -f src/CMakeFiles/epever.dir/build.make src/CMakeFiles/epever.dir/epever.cpp.o
+.PHONY : epever.cpp.o
+
+epever.i: epever.cpp.i
+
+.PHONY : epever.i
+
+# target to preprocess a source file
+epever.cpp.i:
+	cd /home/lcagnizi/enercastlib/build && $(MAKE) -f src/CMakeFiles/epever.dir/build.make src/CMakeFiles/epever.dir/epever.cpp.i
+.PHONY : epever.cpp.i
+
+epever.s: epever.cpp.s
+
+.PHONY : epever.s
+
+# target to generate assembly for a file
+epever.cpp.s:
+	cd /home/lcagnizi/enercastlib/build && $(MAKE) -f src/CMakeFiles/epever.dir/build.make src/CMakeFiles/epever.dir/epever.cpp.s
+.PHONY : epever.cpp.s
 
 tristar.o: tristar.cpp.o
 
@@ -131,7 +173,7 @@ tristar.o: tristar.cpp.o
 
 # target to build an object file
 tristar.cpp.o:
-	cd /home/lcagnizi/enercastlib/build && $(MAKE) -f src/CMakeFiles/src.dir/build.make src/CMakeFiles/src.dir/tristar.cpp.o
+	cd /home/lcagnizi/enercastlib/build && $(MAKE) -f src/CMakeFiles/tristar.dir/build.make src/CMakeFiles/tristar.dir/tristar.cpp.o
 .PHONY : tristar.cpp.o
 
 tristar.i: tristar.cpp.i
@@ -140,7 +182,7 @@ tristar.i: tristar.cpp.i
 
 # target to preprocess a source file
 tristar.cpp.i:
-	cd /home/lcagnizi/enercastlib/build && $(MAKE) -f src/CMakeFiles/src.dir/build.make src/CMakeFiles/src.dir/tristar.cpp.i
+	cd /home/lcagnizi/enercastlib/build && $(MAKE) -f src/CMakeFiles/tristar.dir/build.make src/CMakeFiles/tristar.dir/tristar.cpp.i
 .PHONY : tristar.cpp.i
 
 tristar.s: tristar.cpp.s
@@ -149,7 +191,7 @@ tristar.s: tristar.cpp.s
 
 # target to generate assembly for a file
 tristar.cpp.s:
-	cd /home/lcagnizi/enercastlib/build && $(MAKE) -f src/CMakeFiles/src.dir/build.make src/CMakeFiles/src.dir/tristar.cpp.s
+	cd /home/lcagnizi/enercastlib/build && $(MAKE) -f src/CMakeFiles/tristar.dir/build.make src/CMakeFiles/tristar.dir/tristar.cpp.s
 .PHONY : tristar.cpp.s
 
 # Help Target
@@ -159,8 +201,12 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... src"
 	@echo "... edit_cache"
+	@echo "... tristar"
+	@echo "... epever"
+	@echo "... epever.o"
+	@echo "... epever.i"
+	@echo "... epever.s"
 	@echo "... tristar.o"
 	@echo "... tristar.i"
 	@echo "... tristar.s"
