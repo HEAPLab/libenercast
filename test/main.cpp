@@ -37,12 +37,12 @@ int main(int argc, char const *argv[])
     float voltageRec = device->getVoltageReconnect();
     std::cout<<"voltage reconnect: "<<voltageRec<<std::endl;
 
-    device->setVoltageReconnect(13.008);
+    //device->setVoltageReconnect(13.008);
 
-    voltageRec = device->getVoltageReconnect();
-    std::cout<<"voltage reconnect: "<<voltageRec<<std::endl;
+    //voltageRec = device->getVoltageReconnect();
+    //std::cout<<"voltage reconnect: "<<voltageRec<<std::endl;
 
-    device->clearFaults();
+    //device->clearFaults();
     fault = device->getFault();
     std::cout<<"fault: "<<fault<<std::endl;
     

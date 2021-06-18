@@ -165,8 +165,9 @@ void tristar::setVoltageReconnect(float v) const {
 }
 
 void tristar::clearFaults() const {
+    uint16_t dest[1];
     modbus_set_debug(ctx,TRUE);
-    if(modbus_write_bit(ctx, 0x0014, 1)==-1){
+    if(modbus_read_registers(ctx,0x0014,1,dest)==-1){
         std::cout<<modbus_strerror(errno)<<std::endl;
         modbus_free(ctx);
     }
