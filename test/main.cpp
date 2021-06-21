@@ -5,20 +5,25 @@
 int main(int argc, char const *argv[])
 {
     chargeController *device = new tristar("/dev/ttyUSB0");
-    float battVoltage = device->getBatteryVoltage();
+    chargeController *deviceE = new epever("/dev/ttyXRUSB0");
+  
+   /* float battVoltage = device->getBatteryVoltage();
     std::cout<<"battery Voltage Tristar: "<<battVoltage<<std::endl;
 
-    chargeController *deviceE = new epever("/dev/ttyXRUSB0");
     float battVoltageE = deviceE->getBatteryVoltage();
     std::cout<<"battery Voltage Epever: "<<battVoltageE<<std::endl;
 
-    /*float solarCurrent = device->getChargeCurrent();
-    std::cout<<"charge/solar current: " <<solarCurrent<<std::endl;
+    float solarCurrent = device->getChargeCurrent();
+    std::cout<<"charge/solar current: " <<solarCurrent<<std::endl;*/
 
     float loadCurrent = device->getLoadCurrent();
     std::cout<<"Load current: "<<loadCurrent<<std::endl;
 
-    int controlState = device->getControlMode();
+    float loadCurrentE = deviceE->getLoadCurrent();
+    std::cout<<"Load current: "<<loadCurrentE<<std::endl;
+
+
+   /* int controlState = device->getControlMode();
     std::cout<<"control mode: "<<controlState<<std::endl;
 
     int heatsinkTemp = device->getHeatsinkTemp();

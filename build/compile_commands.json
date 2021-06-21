@@ -1,0 +1,17 @@
+[
+{
+  "directory": "/home/lcagnizi/enercastlib/build/src",
+  "command": "/usr/bin/c++   -I/home/lcagnizi/enercastlib/include -I/usr/include/modbus  -g   -o CMakeFiles/tristar.dir/tristar.cpp.o -c /home/lcagnizi/enercastlib/src/tristar.cpp",
+  "file": "/home/lcagnizi/enercastlib/src/tristar.cpp"
+},
+{
+  "directory": "/home/lcagnizi/enercastlib/build/src",
+  "command": "/usr/bin/c++   -I/home/lcagnizi/enercastlib/include -I/usr/include/modbus  -g   -o CMakeFiles/epever.dir/epever.cpp.o -c /home/lcagnizi/enercastlib/src/epever.cpp",
+  "file": "/home/lcagnizi/enercastlib/src/epever.cpp"
+},
+{
+  "directory": "/home/lcagnizi/enercastlib/build/test",
+  "command": "/usr/bin/c++   -I/home/lcagnizi/enercastlib/include -I/usr/include/modbus  -g   -o CMakeFiles/main.dir/main.cpp.o -c /home/lcagnizi/enercastlib/test/main.cpp",
+  "file": "/home/lcagnizi/enercastlib/test/main.cpp"
+}
+]

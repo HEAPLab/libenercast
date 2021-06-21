@@ -58,6 +58,7 @@ float tristar::getLoadCurrent() const {
         return dest[0]*316.67/32768;
     }
 }
+
 //Reports the mode in which the controller is running.
 //0x00=charge
 //0x01=load 

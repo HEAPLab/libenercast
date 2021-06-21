@@ -29,6 +29,33 @@ public:
     virtual void setVoltageReconnect(float v) const =0;
     virtual void clearFaults() const =0;
 
+    /* 
+    //array information
+    //Array current
+    //Array Voltage
+    //Array Power
+    //Array Status
+    
+    //Battery information
+    //Battery Voltage
+    //Max Voltage Today
+    //Min Voltage today
+    //Battery Temperature
+    //Battery SOC
+    //Charging status
+    //Battery Status
+
+    //Load information
+    //Load Current
+    //Load Voltage
+    //Load Power
+    //Load Status
+
+    //Controller Information
+    //Device Temperature
+    //Device status
+    */
+
  };
 
 #endif

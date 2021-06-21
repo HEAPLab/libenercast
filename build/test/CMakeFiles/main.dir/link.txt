@@ -1,1 +1,1 @@
-/usr/bin/c++     CMakeFiles/main.dir/main.cpp.o  -o main ../src/libtristar.a ../src/libepever.a -lmodbus 
+/usr/bin/c++  -g   CMakeFiles/main.dir/main.cpp.o  -o main ../src/libtristar.a ../src/libepever.a -lmodbus 
