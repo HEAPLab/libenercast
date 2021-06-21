@@ -24,4 +24,15 @@ public:
     virtual float getVoltageReconnect() const override;
     virtual void setVoltageReconnect(float v) const override;
     virtual void clearFaults() const override;
+    virtual float getLoadVoltage() const override;
+    virtual float getLoadPower() const override;
+    virtual float getLoadStatus() const override; 
+    virtual float getArrayVoltage() const override;
+    virtual float getArrayPower() const override;
+    virtual float getArrayStatus() const override;
+    virtual float deviceStatus() const override; 
+
+
+
+
 };

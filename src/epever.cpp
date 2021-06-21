@@ -38,27 +38,124 @@ float epever::getBatteryVoltage() const {
         return dest[0];
     }
 }
-    float epever::getChargeCurrent() const {return 0;};
+    
 
     float epever::getLoadCurrent() const {
-    uint16_t dest[16];
-    modbus_set_debug(ctx,TRUE);
-    if(modbus_read_input_registers(ctx, 0x310D, 1, dest)==-1){
-        std::cout<<modbus_strerror(errno)<<std::endl;
-        modbus_free(ctx);
-    }else{
-        return dest[0];
+        uint16_t dest[16];
+        modbus_set_debug(ctx,TRUE);
+        if(modbus_read_input_registers(ctx, 0x310D, 1, dest)==-1){
+            std::cout<<modbus_strerror(errno)<<std::endl;
+            modbus_free(ctx);
+        }else{
+            return dest[0];
+    }
+  
+}
+
+    float epever::getLoadVoltage() const {
+         uint16_t dest[16];
+        modbus_set_debug(ctx,TRUE);
+        if(modbus_read_input_registers(ctx, 0x310C, 1, dest)==-1){
+            std::cout<<modbus_strerror(errno)<<std::endl;
+            modbus_free(ctx);
+        }else{
+            return dest[0];
+    }
+
+}
+
+float epever::getLoadPower() const {
+         uint16_t dest[2];
+        modbus_set_debug(ctx,TRUE);
+        if(modbus_read_input_registers(ctx, 0x310E, 2, dest)==-1){
+            std::cout<<modbus_strerror(errno)<<std::endl;
+            modbus_free(ctx);
+        }else{
+            return dest[0]; // aggiustare (2 reg)
     }
 }
-    float epever::getControlMode() const {return 0;};
-    float epever::getHeatsinkTemp() const {return 0;};
-    float epever::getBatteryTemp() const {return 0;};
-    float epever::getRegulationVoltage() const {return 0;};
-    float epever::getAlarmLo() const {return 0;};
-    float epever::getFault() const {return 0;};
 
-    float epever::getVoltageDisconnect() const {return 0;};
-    void epever::setVoltageDisconnect(float v) const {};
-    float epever::getVoltageReconnect() const {return 0;};
-    void epever::setVoltageReconnect(float v) const {};
-    void epever::clearFaults() const {};
+    float epever::getLoadStatus() const {
+        uint16_t dest[1];
+        modbus_set_debug(ctx,TRUE);
+        if(modbus_read_input_registers(ctx, 0x3202, 1, dest)==-1){ 
+            std::cout<<modbus_strerror(errno)<<std::endl;
+            modbus_free(ctx);
+        }else{
+            return dest[0];  //risultato dipende dal bit correggere return
+    }
+}
+    float epever::getChargeCurrent() const {
+        uint16_t dest[1];
+        modbus_set_debug(ctx,TRUE);
+        if(modbus_read_input_registers(ctx, 0x3101, 1, dest)==-1){
+            std::cout<<modbus_strerror(errno)<<std::endl;
+            modbus_free(ctx);
+        }else{
+            return dest[0]; 
+        }
+    }
+    float epever::getArrayVoltage() const {
+        uint16_t dest[1];
+        modbus_set_debug(ctx,TRUE);
+        if(modbus_read_input_registers(ctx, 0x3100, 1, dest)==-1){
+            std::cout<<modbus_strerror(errno)<<std::endl;
+            modbus_free(ctx);
+        }else{
+            return dest[0]; 
+        }
+    }
+    float epever::getArrayPower() const {
+        uint16_t dest[2];
+        modbus_set_debug(ctx,TRUE);
+        if(modbus_read_input_registers(ctx, 0x3102, 2, dest)==-1){
+            std::cout<<modbus_strerror(errno)<<std::endl;
+            modbus_free(ctx);
+        }else{
+            return dest[0]; //aggiustare (2 reg)
+    }
+    }
+    float epever::getArrayStatus() const {
+        uint16_t dest[1];
+        modbus_set_debug(ctx,TRUE);
+        if(modbus_read_input_registers(ctx, 0x3201, 1, dest)==-1){ 
+            std::cout<<modbus_strerror(errno)<<std::endl;
+            modbus_free(ctx);
+        }else{
+            return dest[0]; //Va selezionato il bit,correggere 
+        }
+    }
+    float epever::deviceStatus() const {
+        uint16_t dest[1];
+        modbus_set_debug(ctx,TRUE);
+        if(modbus_read_input_registers(ctx, 0x3201, 1, dest)==-1){
+            std::cout<<modbus_strerror(errno)<<std::endl;
+            modbus_free(ctx);
+        }else{
+            return dest[0]; //Va selezionato il bit,correggere 
+        }
+    }
+    float epever::getHeatsinkTemp() const {
+        uint16_t dest[1];
+        modbus_set_debug(ctx,TRUE);
+        if(modbus_read_input_registers(ctx, 0x3111, 1, dest)==-1){
+            std::cout<<modbus_strerror(errno)<<std::endl;
+            modbus_free(ctx);
+        }else{
+            return dest[0];  
+        }
+    }
+
+   
+    float epever::getControlMode() const {return 0;}
+
+    float epever::getBatteryTemp() const {return 0;}
+    float epever::getRegulationVoltage() const {return 0;}
+    float epever::getAlarmLo() const {return 0;}
+    float epever::getFault() const {return 0;}
+
+    float epever::getVoltageDisconnect() const {return 0;}
+    void epever::setVoltageDisconnect(float v) const {}
+    float epever::getVoltageReconnect() const {return 0;}
+    void epever::setVoltageReconnect(float v) const {}
+    void epever::clearFaults() const {}

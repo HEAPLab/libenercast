@@ -174,3 +174,21 @@ void tristar::clearFaults() const {
     }
     modbus_set_debug(ctx,FALSE);
 }
+ 
+float tristar::getLoadVoltage() const {
+    uint16_t dest[16];
+    modbus_set_debug(ctx,TRUE);
+    if(modbus_read_input_registers(ctx, 0x000A, 1, dest)==-1){ //Depends on control mode!!
+        std::cout<<modbus_strerror(errno)<<std::endl;
+        modbus_free(ctx);
+    }else{
+        return dest[0];
+    }
+}
+
+float tristar::getLoadPower() const {return 0;}
+float tristar::getLoadStatus() const {return 0;}
+float tristar::getArrayVoltage() const {return 0;}
+float tristar::getArrayPower() const {return 0;}
+float tristar::getArrayStatus() const {return 0;}
+float tristar::deviceStatus() const {return 0;}
