@@ -15,6 +15,17 @@ public:
     virtual float getVoltageReconnect() const =0;
     virtual void setVoltageReconnect(float v) const =0;
     virtual void clearFaults() const =0;
+    
+    /*//Tristar ex
+    virtual float getRegulationVoltage() const = 0;
+    virtual void setRegulationVoltage() const = 0;
+    virtual float getRegulationVoltage() const = 0;
+    virtual void setRegulationVoltage() const = 0;
+    virtual float getTimeBeforeFloat() const = 0;
+    virtual void setTimeBeforeFloat() const = 0;
+    virtual float getTimeBeforeFloatLB() const = 0;
+    virtual void setTimeBeforeFloatLB() const = 0;*/
+
 
     
     //--Array information
@@ -31,7 +42,9 @@ public:
     //Battery Voltage
     virtual float getBatteryVoltage() const = 0; //A36
     //Max Voltage Today
+    virtual float maxBatteryVoltageToday() const = 0;
     //Min Voltage today
+    virtual float minBatteryVoltageToday() const = 0;    
     //Battery Temperature
     virtual float getBatteryTemp() const = 0; //A11
     //Battery SOC
@@ -63,6 +76,9 @@ public:
     // Battery lower temperature limit (9018)
     // Device over temperature (9019)
     // Device recovery temperature (9063)
+    //Device time (9013  min, sec)(9014  day, hour)(9015 year, month)
+    virtual void chargingDeviceOn() const = 0;
+    virtual void chargingDeviceOff() const = 0;
 
     //--Load parameters
 

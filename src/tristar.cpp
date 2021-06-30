@@ -166,9 +166,8 @@ void tristar::setVoltageReconnect(float v) const {
 }
 
 void tristar::clearFaults() const {
-    uint16_t dest[1];
     modbus_set_debug(ctx,TRUE);
-    if(modbus_read_registers(ctx,0x0014,1,dest)==-1){
+    if(modbus_write_bit(ctx,0x0014,0xFF00)==-1){
         std::cout<<modbus_strerror(errno)<<std::endl;
         modbus_free(ctx);
     }
@@ -185,6 +184,26 @@ float tristar::getLoadVoltage() const {
         return dest[0];
     }
 }
+    float tristar::maxBatteryVoltageToday() const {
+    uint16_t dest[1];
+    //modbus_set_debug(ctx,TRUE);
+    if(modbus_read_input_registers(ctx, 0xE02B, 1, dest)==-1){ 
+        std::cout<<modbus_strerror(errno)<<std::endl;
+        modbus_free(ctx);
+    }else{
+        return dest[0]*96.667/32768;
+    }
+}
+    float tristar::minBatteryVoltageToday() const {
+    uint16_t dest[1];
+    //modbus_set_debug(ctx,TRUE);
+    if(modbus_read_input_registers(ctx, 0xE02C, 1, dest)==-1){ 
+        std::cout<<modbus_strerror(errno)<<std::endl;
+        modbus_free(ctx);
+    }else{
+        return dest[0]*96.667/32768;
+    }
+}
 
 float tristar::getLoadPower() const {return 0;}
 float tristar::getLoadStatus() const {return 0;}
@@ -192,3 +211,5 @@ float tristar::getArrayVoltage() const {return 0;}
 float tristar::getArrayPower() const {return 0;}
 float tristar::getArrayStatus() const {return 0;}
 float tristar::deviceStatus() const {return 0;}
+void tristar::chargingDeviceOn() const {}
+void tristar::chargingDeviceOff() const {}

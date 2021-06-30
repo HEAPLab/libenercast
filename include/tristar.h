@@ -31,6 +31,12 @@ public:
     virtual float getArrayPower() const override;
     virtual float getArrayStatus() const override;
     virtual float deviceStatus() const override; 
+    virtual void chargingDeviceOn() const override;
+    virtual void chargingDeviceOff() const override;
+    virtual float maxBatteryVoltageToday() const override;
+    virtual float minBatteryVoltageToday() const override;
+
+
 
 
 

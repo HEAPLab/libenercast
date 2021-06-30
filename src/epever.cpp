@@ -146,6 +146,46 @@ float epever::getLoadPower() const {
         }
     }
 
+    void epever::chargingDeviceOn() const {
+        modbus_set_debug(ctx,TRUE);
+        if(modbus_write_bit(ctx,0,0xFF00)==-1){
+            std::cout<<modbus_strerror(errno)<<std::endl;
+            modbus_free(ctx);
+        }else{
+             
+        }
+    }
+    void epever::chargingDeviceOff() const {
+        modbus_set_debug(ctx,TRUE);
+        if(modbus_write_bit(ctx,0,0)==-1){
+            std::cout<<modbus_strerror(errno)<<std::endl;
+            modbus_free(ctx);
+        }else{
+             
+        }
+    }
+    float epever::maxBatteryVoltageToday() const {
+    uint16_t dest[1];
+    //modbus_set_debug(ctx,TRUE);
+    if(modbus_read_input_registers(ctx, 0x3302, 1, dest)==-1){ 
+        std::cout<<modbus_strerror(errno)<<std::endl;
+        modbus_free(ctx);
+    }else{
+        return dest[0];
+    }
+}
+    float epever::minBatteryVoltageToday() const {
+    uint16_t dest[1];
+    //modbus_set_debug(ctx,TRUE);
+    if(modbus_read_input_registers(ctx, 0x3303, 1, dest)==-1){ 
+        std::cout<<modbus_strerror(errno)<<std::endl;
+        modbus_free(ctx);
+    }else{
+        return dest[0];
+    }
+}
+
+
    
     float epever::getControlMode() const {return 0;}
 

@@ -33,28 +33,36 @@ int main(int argc, char const *argv[])
     std::cout<<"battery temperature: "<<batteryTemp<<std::endl;
 
     int regulationVoltage = device->getRegulationVoltage();
-    std::cout<<"Regulation/Target voltage: "<<regulationVoltage<<std::endl;
+    std::cout<<"Regulation/Target voltage: "<<regulationVoltage<<std::endl;*/
 
     int fault = device->getFault();
     std::cout<<"fault: "<<fault<<std::endl;
 
-    int alarm = device->getAlarmLo();
+    /*int alarm = device->getAlarmLo();
     std::cout<<"alarm: "<<alarm<<std::endl;
 
     float voltageDisconnect = device->getVoltageDisconnect();
-    std::cout<<"voltage disconnect: "<<voltageDisconnect<<std::endl;
+    std::cout<<"voltage disconnect: "<<voltageDisconnect<<std::endl; 
     
     float voltageRec = device->getVoltageReconnect();
+    std::cout<<"voltage reconnect: "<<voltageRec<<std::endl;
+
+    device->setVoltageReconnect(13.008);
+
+    voltageRec = device->getVoltageReconnect();
     std::cout<<"voltage reconnect: "<<voltageRec<<std::endl;*/
 
-    //device->setVoltageReconnect(13.008);
+    float minBatteryV = device->minBatteryVoltageToday();
+    std::cout<<"Min Battery Today: "<<minBatteryV<<std::endl;
+    
+    float maxBatteryV = device->maxBatteryVoltageToday();
+    std::cout<<"Max Battery Voltage Today : "<<maxBatteryV<<std::endl;
 
-    //voltageRec = device->getVoltageReconnect();
-    //std::cout<<"voltage reconnect: "<<voltageRec<<std::endl;
 
-    //device->clearFaults();
-    //fault = device->getFault();
-    //std::cout<<"fault: "<<fault<<std::endl;
+
+    device->clearFaults();
+    fault = device->getFault();
+    std::cout<<"fault: "<<fault<<std::endl;
     
     return 0;
 }
