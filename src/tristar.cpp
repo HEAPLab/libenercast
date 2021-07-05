@@ -26,7 +26,7 @@ tristar::~tristar()
 //Voltage measured directly at the battery connection on the TriStar, filtered.
 float tristar::getBatteryVoltage() const {
     uint16_t dest[16];
-    //modbus_set_debug(ctx,TRUE);
+    modbus_set_debug(ctx,TRUE);
     if(modbus_read_input_registers(ctx, 0x0008, 1, dest)==-1){
         std::cout<<modbus_strerror(errno)<<std::endl;
         modbus_free(ctx);
@@ -66,7 +66,7 @@ float tristar::getLoadCurrent() const {
 //0x03=lighting
 float tristar::getControlMode() const {
     uint16_t dest[1];
-    //modbus_set_debug(ctx,TRUE);
+    modbus_set_debug(ctx,TRUE);
     if(modbus_read_input_registers(ctx, 0x001A, 1, dest)==-1){
         std::cout<<modbus_strerror(errno)<<std::endl;
         modbus_free(ctx);
@@ -128,7 +128,7 @@ float tristar::getAlarmLo() const {
         return dest[0]; // or read which is the error and return error number/name 
     }
 }
-float tristar::getVoltageDisconnect() const {
+float tristar::getHighVoltageDisconnect() const {
     uint16_t dest[1];
     //modbus_set_debug(ctx,TRUE);
     if(modbus_read_input_registers(ctx, 0xE00B, 1, dest)==-1){
@@ -138,7 +138,7 @@ float tristar::getVoltageDisconnect() const {
         return dest[0]*96.667/32768;
     }
 }
-void tristar::setVoltageDisconnect(float v) const { 
+void tristar::setHighVoltageDisconnect(float v) const { 
     //modbus_set_debug(ctx,TRUE);
     if(modbus_write_register(ctx, 0xE00B, v*32768/96.667)==-1){
         std::cout<<modbus_strerror(errno)<<std::endl;
@@ -146,7 +146,7 @@ void tristar::setVoltageDisconnect(float v) const {
     }
     
 }
-float tristar::getVoltageReconnect() const {
+float tristar::getHighVoltageReconnect() const {
     uint16_t dest[1];
     //modbus_set_debug(ctx,TRUE);
     if(modbus_read_input_registers(ctx, 0xE00C, 1, dest)==-1){
@@ -156,7 +156,7 @@ float tristar::getVoltageReconnect() const {
         return dest[0]*96.667/32768;
     }
 }
-void tristar::setVoltageReconnect(float v) const {
+void tristar::setHighVoltageReconnect(float v) const {
     //modbus_set_debug(ctx,TRUE);
     if(modbus_write_register(ctx, 0xE00C, v*32768/96.667)==-1){
         std::cout<<modbus_strerror(errno)<<std::endl;
@@ -175,13 +175,17 @@ void tristar::clearFaults() const {
 }
  
 float tristar::getLoadVoltage() const {
-    uint16_t dest[16];
+    uint16_t dest[1];
     modbus_set_debug(ctx,TRUE);
-    if(modbus_read_input_registers(ctx, 0x000A, 1, dest)==-1){ //Depends on control mode!!
-        std::cout<<modbus_strerror(errno)<<std::endl;
-        modbus_free(ctx);
+    if(this->getControlMode()==1||this->getControlMode()==2){ //if load or diversion mode
+        if(modbus_read_input_registers(ctx, 0x000A, 1, dest)==-1){ 
+            std::cout<<modbus_strerror(errno)<<std::endl;
+            modbus_free(ctx);
+        }else{
+            return dest[0];
+        }
     }else{
-        return dest[0];
+        //errore
     }
 }
     float tristar::maxBatteryVoltageToday() const {
@@ -205,9 +209,204 @@ float tristar::getLoadVoltage() const {
     }
 }
 
+    float tristar::getHourmeter() const {
+    uint16_t dest[2];
+    modbus_set_debug(ctx,TRUE);
+    if(modbus_read_input_registers(ctx, 0x0015, 2, dest)==-1){ 
+        std::cout<<modbus_strerror(errno)<<std::endl;
+        modbus_free(ctx);
+    }else{
+        uint32_t result = (dest[0]<<16)+dest[1];
+        return result;
+    }
+}
+
+    float tristar::getAmpHour_r() const {
+        uint16_t dest[2];
+    modbus_set_debug(ctx,TRUE);
+    if(modbus_read_input_registers(ctx, 0x0011, 2, dest)==-1){ 
+        std::cout<<modbus_strerror(errno)<<std::endl;
+        modbus_free(ctx);
+    }else{
+        uint32_t result = (dest[0]<<16)+dest[1];
+        return result;
+    }
+}
+    float tristar::getAmpHour() const {
+        uint16_t dest[2];
+    modbus_set_debug(ctx,TRUE);
+    if(modbus_read_input_registers(ctx, 0x0013, 2, dest)==-1){ 
+        std::cout<<modbus_strerror(errno)<<std::endl;
+        modbus_free(ctx);
+    }else{
+        uint32_t result = (dest[0]<<16)+dest[1];
+        return result;
+    }
+} 
+
+    float tristar::getControlState() const {
+          uint16_t dest[1];
+    modbus_set_debug(ctx,TRUE);
+    if(modbus_read_input_registers(ctx, 0x001B, 1, dest)==-1){ //Depends on control mode!!
+        std::cout<<modbus_strerror(errno)<<std::endl;
+        modbus_free(ctx);
+    }else{
+        return dest[0];
+    }
+}
+
+float tristar::getArrayVoltage() const {
+    uint16_t dest[1];
+    modbus_set_debug(ctx,TRUE);
+    if(this->getControlMode()==0){
+        if(modbus_read_input_registers(ctx, 0x000A, 1, dest)==-1){ 
+            std::cout<<modbus_strerror(errno)<<std::endl;
+            modbus_free(ctx);
+        }else{
+            return dest[0];
+        }
+    }else{
+        //errore
+    }
+}
+
+float tristar::getDipswitchPos() const {
+    uint16_t dest[1];
+    modbus_set_debug(ctx,TRUE);
+    if(modbus_read_input_registers(ctx, 0x0019, 1, dest)==-1){ 
+        std::cout<<modbus_strerror(errno)<<std::endl;
+        modbus_free(ctx);
+    }else{
+        return dest[0];
+    }
+}
+    
+float tristar::getLowVoltageDisconnect() const {
+    uint16_t dest[1];
+    //modbus_set_debug(ctx,TRUE);
+    if(modbus_read_input_registers(ctx, 0xE00F, 1, dest)==-1){
+        std::cout<<modbus_strerror(errno)<<std::endl;
+        modbus_free(ctx);
+    }else{
+        return dest[0]*96.667/32768;
+    }
+}
+void tristar::setLowVoltageDisconnect(float v) const {
+    //modbus_set_debug(ctx,TRUE);
+    if(modbus_write_register(ctx, 0xE00F, v*32768/96.667)==-1){
+        std::cout<<modbus_strerror(errno)<<std::endl;
+        modbus_free(ctx);
+    }
+}
+float tristar::getLowVoltageReconnect() const {
+    uint16_t dest[1];
+    //modbus_set_debug(ctx,TRUE);
+    if(modbus_read_input_registers(ctx, 0xE010, 1, dest)==-1){
+        std::cout<<modbus_strerror(errno)<<std::endl;
+        modbus_free(ctx);
+    }else{
+        return dest[0]*96.667/32768;
+    }
+}
+void tristar::setLowVoltageReconnect(float v) const {
+    //modbus_set_debug(ctx,TRUE);
+    if(modbus_write_register(ctx, 0xE010, v*32768/96.667)==-1){
+        std::cout<<modbus_strerror(errno)<<std::endl;
+        modbus_free(ctx);
+    }
+}
+
+float tristar::getLVDwarningTimeout() const {
+     uint16_t dest[1];
+    //modbus_set_debug(ctx,TRUE);
+    if(modbus_read_input_registers(ctx, 0xE014, 1, dest)==-1){
+        std::cout<<modbus_strerror(errno)<<std::endl;
+        modbus_free(ctx);
+    }else{
+        return dest[0]*0.1;
+    }
+}
+void tristar::setLVDwarningTimeout(float v) const {
+      //modbus_set_debug(ctx,TRUE);
+    if(modbus_write_register(ctx, 0xE010, v*0.1)==-1){
+        std::cout<<modbus_strerror(errno)<<std::endl;
+        modbus_free(ctx);
+    }
+}
+
+
+float tristar::getLedV_g_gy() const {
+    uint16_t dest[1];
+    //modbus_set_debug(ctx,TRUE);
+    if(modbus_read_input_registers(ctx, 0xE01B, 1, dest)==-1){
+        std::cout<<modbus_strerror(errno)<<std::endl;
+        modbus_free(ctx);
+    }else{
+        return dest[0]*96.667/32768;
+    }
+}
+
+void tristar::setLedV_g_gy(float v) const {
+    //modbus_set_debug(ctx,TRUE);
+    if(modbus_write_register(ctx, 0xE01B, v*32768/96.667)==-1){
+        std::cout<<modbus_strerror(errno)<<std::endl;
+        modbus_free(ctx);
+    }
+}
+float tristar::getLedV_gy_y() const{
+    uint16_t dest[1];
+    //modbus_set_debug(ctx,TRUE);
+    if(modbus_read_input_registers(ctx, 0xE01C, 1, dest)==-1){
+        std::cout<<modbus_strerror(errno)<<std::endl;
+        modbus_free(ctx);
+    }else{
+        return dest[0]*96.667/32768;
+    }
+}
+void tristar::setLedV_gy_y(float v) const {
+    //modbus_set_debug(ctx,TRUE);
+    if(modbus_write_register(ctx, 0xE01C, v*32768/96.667)==-1){
+        std::cout<<modbus_strerror(errno)<<std::endl;
+        modbus_free(ctx);
+    }
+}
+float tristar::getLedV_y_yr() const{
+    uint16_t dest[1];
+    //modbus_set_debug(ctx,TRUE);
+    if(modbus_read_input_registers(ctx, 0xE01D, 1, dest)==-1){
+        std::cout<<modbus_strerror(errno)<<std::endl;
+        modbus_free(ctx);
+    }else{
+        return dest[0]*96.667/32768;
+    }
+}
+void tristar::setLedV_y_yr(float v) const {
+    //modbus_set_debug(ctx,TRUE);
+    if(modbus_write_register(ctx, 0xE01D, v*32768/96.667)==-1){
+        std::cout<<modbus_strerror(errno)<<std::endl;
+        modbus_free(ctx);
+    }
+}
+float tristar::getLedV_yr_r() const {
+    uint16_t dest[1];
+    //modbus_set_debug(ctx,TRUE);
+    if(modbus_read_input_registers(ctx, 0xE01E, 1, dest)==-1){
+        std::cout<<modbus_strerror(errno)<<std::endl;
+        modbus_free(ctx);
+    }else{
+        return dest[0]*96.667/32768;
+    }
+}
+void tristar::setLedV_yr_r(float v) const {
+    //modbus_set_debug(ctx,TRUE);
+    if(modbus_write_register(ctx, 0xE01E, v*32768/96.667)==-1){
+        std::cout<<modbus_strerror(errno)<<std::endl;
+        modbus_free(ctx);
+    }
+} 
+
 float tristar::getLoadPower() const {return 0;}
 float tristar::getLoadStatus() const {return 0;}
-float tristar::getArrayVoltage() const {return 0;}
 float tristar::getArrayPower() const {return 0;}
 float tristar::getArrayStatus() const {return 0;}
 float tristar::deviceStatus() const {return 0;}

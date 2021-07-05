@@ -10,21 +10,52 @@ public:
     virtual float getAlarmLo() const = 0;
     virtual float getFault() const = 0;
     virtual float getControlMode() const = 0;
-    virtual float getVoltageDisconnect() const =0;
-    virtual void setVoltageDisconnect(float v) const =0;
-    virtual float getVoltageReconnect() const =0;
-    virtual void setVoltageReconnect(float v) const =0;
+    virtual float getHighVoltageDisconnect() const =0;
+    virtual void setHighVoltageDisconnect(float v) const =0;
+    virtual float getHighVoltageReconnect() const =0;
+    virtual void setHighVoltageReconnect(float v) const =0;
     virtual void clearFaults() const =0;
     
+    virtual float getHourmeter() const =0;
+    virtual float getAmpHour_r() const =0; //total amp-hours resetable
+    virtual float getAmpHour() const = 0; //total amp-hours
+    virtual float getControlState() const =0; 
+    virtual float getDipswitchPos() const =0;
+    virtual float getLowVoltageDisconnect() const =0;
+    virtual void setLowVoltageDisconnect(float v) const =0;
+    virtual float getLowVoltageReconnect() const =0;
+    virtual void setLowVoltageReconnect(float v) const =0;
+    virtual float getLVDwarningTimeout() const =0;
+    virtual void setLVDwarningTimeout(float v) const =0;
+    virtual float getLedV_g_gy() const =0;
+    virtual void setLedV_g_gy(float v) const =0;
+    virtual float getLedV_gy_y() const =0;
+    virtual void setLedV_gy_y(float v) const =0;
+    virtual float getLedV_y_yr() const =0;
+    virtual void setLedV_y_yr(float v) const =0;
+    virtual float getLedV_yr_r() const =0;
+    virtual void setLedV_yr_r(float v) const =0; 
+
+
     /*//Tristar ex
     virtual float getRegulationVoltage() const = 0;
     virtual void setRegulationVoltage() const = 0;
-    virtual float getRegulationVoltage() const = 0;
-    virtual void setRegulationVoltage() const = 0;
+    virtual void setFloatVoltage() const = 0;
+    virtual float getFloatVoltage() const = 0;
     virtual float getTimeBeforeFloat() const = 0;
     virtual void setTimeBeforeFloat() const = 0;
-    virtual float getTimeBeforeFloatLB() const = 0;
-    virtual void setTimeBeforeFloatLB() const = 0;*/
+    virtual float getTimeBeforeFloat_lb() const = 0;
+    virtual void setTimeBeforeFloat_lb() const = 0;
+    //EV_floatlb_trip
+    virtual float getCancelFloatVoltage() const =0;
+    virtual void setCancelFloatVoltaget() const=0;
+    virtual float getEqualizeVoltage() const =0;
+    virtual void setEqualizeVoltage() const =0;
+    virtual int getDaysBetweenEq() const = 0;
+    virtual void setDaysBetweenEq() const =0;
+    virtual int getDaysLastEq() const = 0;
+    virtual void setDaysLastEq() const =0;
+    */
 
 
     

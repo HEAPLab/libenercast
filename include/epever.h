@@ -19,10 +19,10 @@ public:
     virtual float getAlarmLo() const override;
     virtual float getFault() const override;
 
-    virtual float getVoltageDisconnect() const override;
-    virtual void setVoltageDisconnect(float v) const override;
-    virtual float getVoltageReconnect() const override;
-    virtual void setVoltageReconnect(float v) const override;
+    virtual float getHighVoltageDisconnect() const override;
+    virtual void setHighVoltageDisconnect(float v) const override;
+    virtual float getHighVoltageReconnect() const override;
+    virtual void setHighVoltageReconnect(float v) const override;
     virtual void clearFaults() const override;
     virtual float getLoadVoltage() const override;
     virtual float getLoadPower() const override;
@@ -35,6 +35,8 @@ public:
     virtual void chargingDeviceOff() const override;
     virtual float maxBatteryVoltageToday() const override;
     virtual float minBatteryVoltageToday() const override;
+
+
 
 
 

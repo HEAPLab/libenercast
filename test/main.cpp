@@ -5,13 +5,17 @@
 int main(int argc, char const *argv[])
 {
     chargeController *device = new tristar("/dev/ttyUSB0");
-    chargeController *deviceE = new epever("/dev/ttyXRUSB0");
+    //chargeController *deviceE = new epever("/dev/ttyXRUSB0");
   
     float battVoltage = device->getBatteryVoltage();
     std::cout<<"battery Voltage Tristar: "<<battVoltage<<std::endl;
 
-    float battVoltageE = deviceE->getBatteryVoltage();
-    std::cout<<"battery Voltage Epever: "<<battVoltageE<<std::endl;
+    //float hourmeter = device->getHourmeter();
+    //std::cout<<"hourmeter: "<<hourmeter<<std::endl;
+
+
+    //float battVoltageE = deviceE->getBatteryVoltage();
+    //std::cout<<"battery Voltage Epever: "<<battVoltageE<<std::endl;
 
    /* float solarCurrent = device->getChargeCurrent();
     std::cout<<"charge/solar current: " <<solarCurrent<<std::endl;
@@ -21,10 +25,6 @@ int main(int argc, char const *argv[])
 
     float loadCurrentE = deviceE->getLoadCurrent();
     std::cout<<"Load current: "<<loadCurrentE<<std::endl;
-
-
-    int controlState = device->getControlMode();
-    std::cout<<"control mode: "<<controlState<<std::endl;
 
     int heatsinkTemp = device->getHeatsinkTemp();
     std::cout<<"heatsink temp: "<<heatsinkTemp<<std::endl;
@@ -52,17 +52,22 @@ int main(int argc, char const *argv[])
     voltageRec = device->getVoltageReconnect();
     std::cout<<"voltage reconnect: "<<voltageRec<<std::endl;*/
 
-    float minBatteryV = device->minBatteryVoltageToday();
-    std::cout<<"Min Battery Today: "<<minBatteryV<<std::endl;
+    // float minBatteryV = device->minBatteryVoltageToday();
+    // std::cout<<"Min Battery Today: "<<minBatteryV<<std::endl;
     
-    float maxBatteryV = device->maxBatteryVoltageToday();
-    std::cout<<"Max Battery Voltage Today : "<<maxBatteryV<<std::endl;
+    // float maxBatteryV = device->maxBatteryVoltageToday();
+    // std::cout<<"Max Battery Voltage Today : "<<maxBatteryV<<std::endl;
+
+    // device->clearFaults();
+    // fault = device->getFault();
+    // std::cout<<"fault: "<<fault<<std::endl;
+
+    float controlMode = device->getControlMode();
+    std::cout<<"control mode: "<<controlMode<<std::endl;
 
 
-
-    device->clearFaults();
-    fault = device->getFault();
-    std::cout<<"fault: "<<fault<<std::endl;
+    float controlState = device->getControlState();
+    std::cout<<"control State: "<<controlState<<std::endl;
     
     return 0;
 }

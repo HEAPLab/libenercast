@@ -194,8 +194,8 @@ float epever::getLoadPower() const {
     float epever::getAlarmLo() const {return 0;}
     float epever::getFault() const {return 0;}
 
-    float epever::getVoltageDisconnect() const {return 0;}
-    void epever::setVoltageDisconnect(float v) const {}
-    float epever::getVoltageReconnect() const {return 0;}
-    void epever::setVoltageReconnect(float v) const {}
+    float epever::getHighVoltageDisconnect() const {return 0;}
+    void epever::setHighVoltageDisconnect(float v) const {}
+    float epever::getHighVoltageReconnect() const {return 0;}
+    void epever::setHighVoltageReconnect(float v) const {}
     void epever::clearFaults() const {}
