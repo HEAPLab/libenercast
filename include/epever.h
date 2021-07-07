@@ -12,29 +12,34 @@ public:
     virtual float getBatteryVoltage() const override;
     virtual float getChargeCurrent() const override;
     virtual float getLoadCurrent() const override;
-    virtual float getControlMode() const override;
     virtual float getHeatsinkTemp() const override;
     virtual float getBatteryTemp() const override;
-    virtual float getRegulationVoltage() const override;
-    virtual float getAlarmLo() const override;
-    virtual float getFault() const override;
-
     virtual float getHighVoltageDisconnect() const override;
-    virtual void setHighVoltageDisconnect(float v) const override;
+    virtual void setHighVoltageDisconnect(float v)  override;
     virtual float getHighVoltageReconnect() const override;
-    virtual void setHighVoltageReconnect(float v) const override;
-    virtual void clearFaults() const override;
+    virtual void setHighVoltageReconnect(float v)  override;
     virtual float getLoadVoltage() const override;
-    virtual float getLoadPower() const override;
-    virtual float getLoadStatus() const override; 
-    virtual float getArrayVoltage() const override;
-    virtual float getArrayPower() const override;
-    virtual float getArrayStatus() const override;
-    virtual float deviceStatus() const override;
-    virtual void chargingDeviceOn() const override;
-    virtual void chargingDeviceOff() const override;
     virtual float maxBatteryVoltageToday() const override;
     virtual float minBatteryVoltageToday() const override;
+    virtual float getArrayVoltage() const override;
+
+    //fare
+    virtual float getLowVoltageDisconnect() const override;
+    virtual void setLowVoltageDisconnect(float v)  override;
+    virtual float getLowVoltageReconnect() const override;
+    virtual void setLowVoltageReconnect(float v)  override;
+    virtual float getLVDwarningTimeout() const override;
+    virtual void setLVDwarningTimeout(float v) override; 
+
+
+    float getLoadPower() const;
+    float getLoadStatus() const; 
+    float getArrayPower() const;
+    float getArrayStatus() const;
+    float deviceStatus() const;
+    void chargingDeviceOn() const;
+    void chargingDeviceOff() const;
+    
 
 
 

@@ -29,13 +29,13 @@ epever::~epever()
 
 float epever::getBatteryVoltage() const {
     uint16_t dest[16];
-    modbus_set_debug(ctx,TRUE);
+    //modbus_set_debug(ctx,TRUE);
     if(modbus_read_input_registers(ctx, 0x331A, 1, dest)==-1){
         std::cout << "failed" << std::endl;
         std::cout<<modbus_strerror(errno)<<std::endl;
         modbus_free(ctx);
     }else{
-        return dest[0];
+        return dest[0]*0.01;
     }
 }
     
@@ -185,17 +185,15 @@ float epever::getLoadPower() const {
     }
 }
 
-
-   
-    float epever::getControlMode() const {return 0;}
-
     float epever::getBatteryTemp() const {return 0;}
-    float epever::getRegulationVoltage() const {return 0;}
-    float epever::getAlarmLo() const {return 0;}
-    float epever::getFault() const {return 0;}
-
     float epever::getHighVoltageDisconnect() const {return 0;}
-    void epever::setHighVoltageDisconnect(float v) const {}
+    void epever::setHighVoltageDisconnect(float v) {}
     float epever::getHighVoltageReconnect() const {return 0;}
-    void epever::setHighVoltageReconnect(float v) const {}
-    void epever::clearFaults() const {}
+    void epever::setHighVoltageReconnect(float v)  {}
+    
+    float epever::getLowVoltageDisconnect() const {return 0;}
+    void epever::setLowVoltageDisconnect(float v)  {}
+    float epever::getLowVoltageReconnect() const {return 0;}
+    void epever::setLowVoltageReconnect(float v) {}
+    float epever::getLVDwarningTimeout() const {return 0;}
+    void epever::setLVDwarningTimeout(float v)  {}

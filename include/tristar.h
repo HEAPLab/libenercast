@@ -6,6 +6,8 @@
 class tristar : public chargeController{
 private:
     modbus_t *ctx;
+    void clean_and_throw_error() const;
+
 public:
     tristar(const std::string & device);
     virtual ~tristar();
@@ -16,75 +18,87 @@ public:
     virtual float getLoadCurrent() const override;
     virtual float getHeatsinkTemp() const override;
     virtual float getBatteryTemp() const override;
-    virtual float getAmpHour_r() const override; //total amp-hours resetable
-    virtual float getAmpHour() const override; //total amp-hours
-    virtual float getHourmeter() const override;
-    virtual float getAlarmLo() const override;
-    virtual float getFault() const override;
-    virtual void clearFaults() const override;
-    virtual float getDipswitchPos() const override;
-    virtual float getControlMode() const override;
-    virtual float getControlState() const override; 
+    
+    float getAmpHour_r() const; //total amp-hours resetable
+    float getAmpHour() const; //total amp-hours
+    float getHourmeter() const;
+    float getAlarmLo() const;
+    float getFault() const;
+    void clearFaults() const;
+    float getDipswitchPos() const;
+    float getControlMode() const;
+    float getControlState() const; 
 
 //Charge and diversion mode
-    virtual float getRegulationVoltage() const override;
+    float getRegulationVoltage() const;
     virtual float getHighVoltageDisconnect() const override;
-    virtual void setHighVoltageDisconnect(float v) const override;
+    virtual void setHighVoltageDisconnect(float v)  override;
     virtual float getHighVoltageReconnect() const override;
-    virtual void setHighVoltageReconnect(float v) const override;
-    /*
-    virtual float getRegulationVoltage() const = 0;
-    virtual void setRegulationVoltage() const = 0;
-    virtual void setFloatVoltage() const = 0;
-    virtual float getFloatVoltage() const = 0;
-    virtual float getTimeBeforeFloat() const = 0;
-    virtual void setTimeBeforeFloat() const = 0;
-    virtual float getTimeBeforeFloat_lb() const = 0;
-    virtual void setTimeBeforeFloat_lb() const = 0;
+    virtual void setHighVoltageReconnect(float v)  override;
+    float getRegulationVoltage_25() const;
+
+    void setRegulationVoltage_25(float v);
+    void setFloatVoltage(float v);
+    float getFloatVoltage() const;
+    float getTimeBeforeFloat() const;
+    void setTimeBeforeFloat(unsigned short int s);
+    float getTimeBeforeFloat_lb() const;
+    void setTimeBeforeFloat_lb(unsigned short int s);
     //EV_floatlb_trip
-    virtual float getCancelFloatVoltage() const =0;
-    virtual void setCancelFloatVoltaget() const=0;
-    virtual float getEqualizeVoltage() const =0;
-    virtual void setEqualizeVoltage() const =0;
-    virtual int getDaysBetweenEq() const = 0;
-    virtual void setDaysBetweenEq() const =0;
-    virtual int getDaysLastEq() const = 0;
-    virtual void setDaysLastEq() const =0;
-    */
+    float getCancelFloatVoltage() const;
+    void setCancelFloatVoltage(float v);
+    float getEqualizeVoltage() const;
+    void setEqualizeVoltage(float v);
+    int getDaysBetweenEq() const;
+    void setDaysBetweenEq(uint8_t d); // try unsigned char
+    int getDaysLastEq() const;
+    void setDaysLastEq(uint8_t d); // try unsigned char
+    void setDiversionPWM();
+    void setDiversionOnOff();
+
     
 //Load mode
     virtual float getLowVoltageDisconnect() const override;
-    virtual void setLowVoltageDisconnect(float v) const override;
+    virtual void setLowVoltageDisconnect(float v) override;
     virtual float getLowVoltageReconnect() const override;
-    virtual void setLowVoltageReconnect(float v) const override;
+    virtual void setLowVoltageReconnect(float v) override;
     //ER_icomp??
     virtual float getLVDwarningTimeout() const override;
-    virtual void setLVDwarningTimeout(float v) const override; 
+    virtual void setLVDwarningTimeout(float v) override; 
+
+    float getLoadHVD() const; //Disconnect the loads if the battery voltage rises too high.
+    void setLoadHVD(float v);
+    float getLoadHVR() const; //Setpoint at which the loads will reconnect after a high voltage condition.
+    void setLoadHVR(float v);
     
 //Common values
     virtual float maxBatteryVoltageToday() const override;
     virtual float minBatteryVoltageToday() const override;
-    virtual float getLedV_g_gy() const override;
-    virtual void setLedV_g_gy(float v) const override;
-    virtual float getLedV_gy_y() const override;
-    virtual void setLedV_gy_y(float v) const override;
-    virtual float getLedV_y_yr() const override;
-    virtual void setLedV_y_yr(float v) const override;
-    virtual float getLedV_yr_r() const override;
-    virtual void setLedV_yr_r(float v) const override;
+    float getLedV_g_gy() const;
+    void setLedV_g_gy(float v);
+    float getLedV_gy_y() const;
+    void setLedV_gy_y(float v);
+    float getLedV_y_yr() const;
+    void setLedV_y_yr(float v);
+    float getLedV_yr_r() const;
+    void setLedV_yr_r(float v);
+    float getBattServiceInterval() const;
+    void setBattServiceInterval(int d); // try unsigned char (0-255)
+    float getDaysLastBattService() const;
+    float getKWH() const;
 
-  
-    virtual float getLoadPower() const override;
-    virtual float getLoadStatus() const override; 
-    virtual float getArrayPower() const override;
-    virtual float getArrayStatus() const override;
-    virtual float deviceStatus() const override; 
-    virtual void chargingDeviceOn() const override;
-    virtual void chargingDeviceOff() const override;
-
-
-
-
-
+//Coils
+    void equalize() const;
+    void stopEqualize() const;
+    void disconnect() const;
+    void reconnect() const;
+    void clearAh_r() const;
+    void clearAh() const;
+    void clearKwH() const;
+    void resetLastBattService() const;
+    void clearAlarms() const;
+    void updateEprom() const;
+    void LVDoverride() const;
+    void reset() const;
 
 };
