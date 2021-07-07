@@ -39,6 +39,8 @@ public:
     float deviceStatus() const;
     void chargingDeviceOn() const;
     void chargingDeviceOff() const;
+
+    
     
 
 

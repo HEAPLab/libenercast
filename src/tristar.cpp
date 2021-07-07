@@ -70,7 +70,7 @@ float tristar::getLoadCurrent() const {
 //0x03=lighting
 float tristar::getControlMode() const {
     uint16_t dest[1];
-    modbus_set_debug(ctx,TRUE);
+    //modbus_set_debug(ctx,TRUE);
     if(modbus_read_input_registers(ctx, 0x001A, 1, dest)==-1){
         std::cout<<modbus_strerror(errno)<<std::endl;
         modbus_free(ctx);
@@ -170,7 +170,7 @@ void tristar::setHighVoltageReconnect(float v)  {
 }
 
 void tristar::clearFaults() const {
-    modbus_set_debug(ctx,TRUE);
+    //modbus_set_debug(ctx,TRUE);
     if(modbus_write_bit(ctx,0x0014,0xFF00)==-1){
         std::cout<<modbus_strerror(errno)<<std::endl;
         modbus_free(ctx);
@@ -180,7 +180,7 @@ void tristar::clearFaults() const {
  
 float tristar::getLoadVoltage() const {
     uint16_t dest[1];
-    modbus_set_debug(ctx,TRUE);
+    //modbus_set_debug(ctx,TRUE);
     if(this->getControlMode()==1||this->getControlMode()==2){ //if load or diversion mode
         if(modbus_read_input_registers(ctx, 0x000A, 1, dest)==-1){ 
             std::cout<<modbus_strerror(errno)<<std::endl;
@@ -215,7 +215,7 @@ float tristar::getLoadVoltage() const {
 
     float tristar::getHourmeter() const {
     uint16_t dest[2];
-    modbus_set_debug(ctx,TRUE);
+    //modbus_set_debug(ctx,TRUE);
     if(modbus_read_input_registers(ctx, 0x0015, 2, dest)==-1){ 
         std::cout<<modbus_strerror(errno)<<std::endl;
         modbus_free(ctx);
@@ -227,7 +227,7 @@ float tristar::getLoadVoltage() const {
 
     float tristar::getAmpHour_r() const {
         uint16_t dest[2];
-    modbus_set_debug(ctx,TRUE);
+    //modbus_set_debug(ctx,TRUE);
     if(modbus_read_input_registers(ctx, 0x0011, 2, dest)==-1){ 
         std::cout<<modbus_strerror(errno)<<std::endl;
         modbus_free(ctx);
@@ -238,7 +238,7 @@ float tristar::getLoadVoltage() const {
 }
     float tristar::getAmpHour() const {
         uint16_t dest[2];
-    modbus_set_debug(ctx,TRUE);
+    //modbus_set_debug(ctx,TRUE);
     if(modbus_read_input_registers(ctx, 0x0013, 2, dest)==-1){ 
         std::cout<<modbus_strerror(errno)<<std::endl;
         modbus_free(ctx);
@@ -250,7 +250,7 @@ float tristar::getLoadVoltage() const {
 
     float tristar::getControlState() const {
           uint16_t dest[1];
-    modbus_set_debug(ctx,TRUE);
+    //modbus_set_debug(ctx,TRUE);
     if(modbus_read_input_registers(ctx, 0x001B, 1, dest)==-1){ //Depends on control mode!!
         std::cout<<modbus_strerror(errno)<<std::endl;
         modbus_free(ctx);
@@ -261,7 +261,7 @@ float tristar::getLoadVoltage() const {
 
 float tristar::getArrayVoltage() const {
     uint16_t dest[1];
-    modbus_set_debug(ctx,TRUE);
+    //modbus_set_debug(ctx,TRUE);
     if(this->getControlMode()==0){
         if(modbus_read_input_registers(ctx, 0x000A, 1, dest)==-1){ 
             std::cout<<modbus_strerror(errno)<<std::endl;
@@ -276,7 +276,7 @@ float tristar::getArrayVoltage() const {
 
 float tristar::getDipswitchPos() const {
     uint16_t dest[1];
-    modbus_set_debug(ctx,TRUE);
+    //modbus_set_debug(ctx,TRUE);
     if(modbus_read_input_registers(ctx, 0x0019, 1, dest)==-1){ 
         std::cout<<modbus_strerror(errno)<<std::endl;
         modbus_free(ctx);
@@ -483,7 +483,7 @@ void tristar::setTimeBeforeFloat_lb(unsigned short int s) {
 }
 //EV_floatlb_trip
 float tristar::getCancelFloatVoltage() const {
-  uint16_t dest[1];
+    uint16_t dest[1];
     //modbus_set_debug(ctx,TRUE);
     if(modbus_read_input_registers(ctx, 0xE005, 1, dest)==-1){
         std::cout<<modbus_strerror(errno)<<std::endl;
@@ -494,14 +494,14 @@ float tristar::getCancelFloatVoltage() const {
     }
 }
 void tristar::setCancelFloatVoltage(float v) {
-  //modbus_set_debug(ctx,TRUE);
+    //modbus_set_debug(ctx,TRUE);
     if(modbus_write_register(ctx, 0xE005, v*32768/96.667)==-1){
         std::cout<<modbus_strerror(errno)<<std::endl;
         modbus_free(ctx);
     }
 }
 float tristar::getEqualizeVoltage() const {
-  uint16_t dest[1];
+    uint16_t dest[1];
     //modbus_set_debug(ctx,TRUE);
     if(modbus_read_input_registers(ctx, 0xE006, 1, dest)==-1){
         std::cout<<modbus_strerror(errno)<<std::endl;
@@ -512,14 +512,14 @@ float tristar::getEqualizeVoltage() const {
     }
 }
 void tristar::setEqualizeVoltage(float v) {
-  //modbus_set_debug(ctx,TRUE);
+    //modbus_set_debug(ctx,TRUE);
     if(modbus_write_register(ctx, 0xE006, v*32768/96.667)==-1){
         std::cout<<modbus_strerror(errno)<<std::endl;
         modbus_free(ctx);
     }
 }
 int tristar::getDaysBetweenEq() const {
-  uint16_t dest[1];
+    uint16_t dest[1];
     //modbus_set_debug(ctx,TRUE);
     if(modbus_read_input_registers(ctx, 0xE007, 1, dest)==-1){
         std::cout<<modbus_strerror(errno)<<std::endl;
@@ -530,14 +530,14 @@ int tristar::getDaysBetweenEq() const {
     }
 }
 void tristar::setDaysBetweenEq(uint8_t d) { // try unsigned char
-  //modbus_set_debug(ctx,TRUE);
+    //modbus_set_debug(ctx,TRUE);
     if(modbus_write_register(ctx, 0xE007, d)==-1){
         std::cout<<modbus_strerror(errno)<<std::endl;
         modbus_free(ctx);
     }
 }
 int tristar::getDaysLastEq() const {
-  uint16_t dest[1];
+    uint16_t dest[1];
     //modbus_set_debug(ctx,TRUE);
     if(modbus_read_input_registers(ctx, 0xE00D, 1, dest)==-1){
         std::cout<<modbus_strerror(errno)<<std::endl;
@@ -548,21 +548,21 @@ int tristar::getDaysLastEq() const {
     }
 }
 void tristar::setDaysLastEq(uint8_t d) { // try unsigned char
-  //modbus_set_debug(ctx,TRUE);
+    //modbus_set_debug(ctx,TRUE);
     if(modbus_write_register(ctx, 0xE00D, d)==-1){
         std::cout<<modbus_strerror(errno)<<std::endl;
         modbus_free(ctx);
     }
 }
 void tristar::setDiversionPWM() {
-  //modbus_set_debug(ctx,TRUE);
+    //modbus_set_debug(ctx,TRUE);
     if(modbus_write_register(ctx, 0xE00D, 0)==-1){
         std::cout<<modbus_strerror(errno)<<std::endl;
         modbus_free(ctx);
     }
 }
 void tristar::setDiversionOnOff() {
-  //modbus_set_debug(ctx,TRUE);
+    //modbus_set_debug(ctx,TRUE);
     if(modbus_write_register(ctx, 0xE042, 1)==-1){
         std::cout<<modbus_strerror(errno)<<std::endl;
         modbus_free(ctx);
@@ -657,7 +657,7 @@ void tristar::equalize() const {
     //modbus_set_debug(ctx,FALSE);
 }
 void tristar::stopEqualize() const {
-  //modbus_set_debug(ctx,TRUE);
+    //modbus_set_debug(ctx,TRUE);
     if(modbus_write_bit(ctx,0x0000,0)==-1){
         std::cout<<modbus_strerror(errno)<<std::endl;
         modbus_free(ctx);
@@ -665,7 +665,7 @@ void tristar::stopEqualize() const {
     //modbus_set_debug(ctx,FALSE);
 }
 void tristar::disconnect() const {
-  //modbus_set_debug(ctx,TRUE);
+    //modbus_set_debug(ctx,TRUE);
     if(modbus_write_bit(ctx,0x0001,0xFF00)==-1){
         std::cout<<modbus_strerror(errno)<<std::endl;
         modbus_free(ctx);
@@ -673,15 +673,15 @@ void tristar::disconnect() const {
     //modbus_set_debug(ctx,FALSE);
 }
 void tristar::reconnect() const {
-  //modbus_set_debug(ctx,TRUE);
-    if(modbus_write_bit(ctx,0x0001,0)==-1){
+    //modbus_set_debug(ctx,TRUE);
+    if(modbus_write_bit(ctx,0x0001,0x0000)==-1){
         std::cout<<modbus_strerror(errno)<<std::endl;
         modbus_free(ctx);
     }
     //modbus_set_debug(ctx,FALSE);
 }
 void tristar::clearAh_r() const {
-  //modbus_set_debug(ctx,TRUE);
+    //modbus_set_debug(ctx,TRUE);
     if(modbus_write_bit(ctx,0x0010,0xFF00)==-1){
         std::cout<<modbus_strerror(errno)<<std::endl;
         modbus_free(ctx);
