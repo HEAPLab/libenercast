@@ -28,7 +28,6 @@ void tristar::clean_and_throw_error() const {
     throw std::runtime_error(modbus_strerror(errno));
 }
 
-//Voltage measured directly at the battery connection on the TriStar, filtered.
 float tristar::getBatteryVoltage() const {
     uint16_t dest[16];
     //modbus_set_debug(ctx,TRUE);
@@ -39,7 +38,6 @@ float tristar::getBatteryVoltage() const {
     }
 }
 
-//Slow filtered charging current value as measured by on-board shunts.
 float tristar::getChargeCurrent() const {
     uint16_t dest[16];
     //modbus_set_debug(ctx,TRUE);
@@ -50,7 +48,6 @@ float tristar::getChargeCurrent() const {
     }
 }
 
-//Slow filtered load current value as measured by on-board shunts.
 float tristar::getLoadCurrent() const {
     uint16_t dest[16];
     //modbus_set_debug(ctx,TRUE);
@@ -94,7 +91,6 @@ float tristar::getBatteryTemp() const {
         return dest[0];
     }
 }
-//Regulation Voltage. Target voltage to which the battery will be charged.
 float tristar::getRegulationVoltage() const {
     uint16_t dest[1];
     //modbus_set_debug(ctx,TRUE);
@@ -105,14 +101,15 @@ float tristar::getRegulationVoltage() const {
         return dest[0]*96.667/3276;
     }
 }
-float tristar::getFault() const {
-    uint16_t dest[1];
+std::bitset<16> tristar::getFault() const {
+    uint16_t dest;
     //modbus_set_debug(ctx,TRUE);
-    if(modbus_read_input_registers(ctx, 0x0018, 1, dest)==-1){
+    if(modbus_read_input_registers(ctx, 0x0018, 1, &dest)==-1){
         clean_and_throw_error();
     }else{
         //modbus_set_debug(ctx,FALSE);
-        return dest[0]; // or read which is the error and return error number/name 
+        std::bitset<16> result=dest;
+        return result;
     }
 }
 float tristar::getAlarmLo() const {
@@ -121,7 +118,7 @@ float tristar::getAlarmLo() const {
     if(modbus_read_input_registers(ctx, 0x0017, 1, dest)==-1){
         clean_and_throw_error();
     }else{
-        return dest[0]; // or read which is the error and return error number/name 
+        return dest[0]; 
     }
 }
 float tristar::getHighVoltageDisconnect() const {
@@ -175,7 +172,7 @@ float tristar::getLoadVoltage() const {
             return dest[0];
         }
     }else{
-        //errore
+        throw std::runtime_error("Charge controller not in load or diversion mode");
     }
 }
     float tristar::maxBatteryVoltageToday() const {
@@ -249,7 +246,7 @@ float tristar::getArrayVoltage() const {
             return dest[0];
         }
     }else{
-        //errore
+        throw std::runtime_error("Charge controller not in solar mode");
     }
 }
 
@@ -303,9 +300,9 @@ float tristar::getLVDwarningTimeout() const {
         return dest[0]*0.1;
     }
 }
-void tristar::setLVDwarningTimeout(float v) {
+void tristar::setLVDwarningTimeout(float s) {
       //modbus_set_debug(ctx,TRUE);
-    if(modbus_write_register(ctx, 0xE010, v*0.1)==-1){
+    if(modbus_write_register(ctx, 0xE014, s*0.1)==-1){
         clean_and_throw_error();
     }
 }
@@ -416,13 +413,14 @@ float tristar::getTimeBeforeFloat() const {
         return dest[0];
     }
 }
-void tristar::setTimeBeforeFloat(unsigned short int s) {
+void tristar::setTimeBeforeFloat(uint16_t s) {
   //modbus_set_debug(ctx,TRUE);
     if(modbus_write_register(ctx, 0xE002, s)==-1){
         clean_and_throw_error();
     }
 }
-float tristar::getTimeBeforeFloat_lb() const {uint16_t dest[1];
+float tristar::getTimeBeforeFloat_lb() const {
+    uint16_t dest[1];
     //modbus_set_debug(ctx,TRUE);
     if(modbus_read_input_registers(ctx, 0xE003, 1, dest)==-1){
         clean_and_throw_error();
@@ -431,7 +429,7 @@ float tristar::getTimeBeforeFloat_lb() const {uint16_t dest[1];
         return dest[0];
     }
 }
-void tristar::setTimeBeforeFloat_lb(unsigned short int s) {
+void tristar::setTimeBeforeFloat_lb(uint16_t s) {
   //modbus_set_debug(ctx,TRUE);
     if(modbus_write_register(ctx, 0xE003, s)==-1){
         clean_and_throw_error();
@@ -480,7 +478,7 @@ int tristar::getDaysBetweenEq() const {
         return dest[0];
     }
 }
-void tristar::setDaysBetweenEq(uint8_t d) { // try unsigned char
+void tristar::setDaysBetweenEq(uint8_t d) { 
     //modbus_set_debug(ctx,TRUE);
     if(modbus_write_register(ctx, 0xE007, d)==-1){
         clean_and_throw_error();
@@ -496,7 +494,7 @@ int tristar::getDaysLastEq() const {
         return dest[0];
     }
 }
-void tristar::setDaysLastEq(uint8_t d) { // try unsigned char
+void tristar::setDaysLastEq(uint8_t d) { 
     //modbus_set_debug(ctx,TRUE);
     if(modbus_write_register(ctx, 0xE00D, d)==-1){
         clean_and_throw_error();
@@ -557,7 +555,7 @@ float tristar::getBattServiceInterval() const {
       return dest[0];
   }
 }
-void tristar::setBattServiceInterval(int d) {// try unsigned char (0-255)
+void tristar::setBattServiceInterval(uint8_t d) {
   //modbus_set_debug(ctx,TRUE);
   if(modbus_write_register(ctx, 0xE022, d)==-1){
       clean_and_throw_error();

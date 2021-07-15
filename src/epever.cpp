@@ -108,7 +108,8 @@ float epever::getLoadPower() const {
         if(modbus_read_input_registers(ctx, 0x3102, 2, dest)==-1){
             clean_and_throw_error();
         }else{
-            return dest[0]; //aggiustare (2 reg)
+            uint32_t result = (dest[0]<<16)+dest[1];
+            return result; 
     }
     }
     float epever::getArrayStatus() const {
@@ -169,7 +170,6 @@ float epever::getLoadPower() const {
         }
     }
     
-    //----------------------------------------------------------------------------
     float epever::getHighVoltageDisconnect() const {
         uint16_t dest[1];
         //modbus_set_debug(ctx,TRUE);

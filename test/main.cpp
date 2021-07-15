@@ -1,14 +1,24 @@
 #include "chargeController.h"
 #include "tristar.h"
 #include "epever.h"
+#include <bitset>
 #include <iostream>
 int main(int argc, char const *argv[])
 {
-       std::cout<<"Tristar:"<<std::endl;
+    std::cout<<"Tristar:"<<std::endl;
     tristar *device = new tristar("/dev/ttyUSB0");
     
     float battVoltage = device->getBatteryVoltage();
     std::cout<<"Battery Voltage: "<<battVoltage<<std::endl;
+    
+    std::bitset<16> fault = device->getFault();
+    std::cout<<"fault bits:"<<fault.to_string()<<std::endl;
+    if(fault.test(device->HVD)){
+        std::cout<<"fault HVD"<<std::endl;
+    }
+    device->clearFaults();
+    fault = device->getFault();
+    std::cout<<"fault bits:"<<fault.to_string()<<std::endl;
 
     /*float hourmeter = device->getHourmeter();
     std::cout<<"hourmeter: "<<hourmeter<<std::endl;
