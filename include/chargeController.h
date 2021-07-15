@@ -26,9 +26,7 @@ public:
     virtual void setLowVoltageDisconnect(float v) =0;
     virtual float getLowVoltageReconnect() const =0;
     virtual void setLowVoltageReconnect(float v) =0;
-    virtual float getLVDwarningTimeout() const =0;
-    virtual void setLVDwarningTimeout(float v) =0;
-
+    
     //--Load information
     virtual float getLoadCurrent() const = 0; 
     virtual float getLoadVoltage() const = 0; 

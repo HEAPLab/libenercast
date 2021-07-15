@@ -26,6 +26,10 @@ public:
         RTS_DISCCONNECTED=11, 
     };
 
+    /**
+     * Tristar class constructor.
+     * @param device "/dev/ttyUSB0" 
+     */
     tristar(const std::string & device);
     virtual ~tristar();
     virtual float getBatteryVoltage() const override;
@@ -140,14 +144,14 @@ public:
     the Low Voltage Disconnect setpoint.
     @return seconds
      */
-    virtual float getLVDwarningTimeout() const override;
+    float getLVDwarningTimeout() const;
     
     /**
      * Defines the period of time to wait before disconnecting the loads, once battery voltage has dropped to
     the Low Voltage Disconnect setpoint.
     @param s seconds
      */
-    virtual void setLVDwarningTimeout(float s) override; 
+    void setLVDwarningTimeout(float s); 
 
     /**
      * /Disconnect the loads if the battery voltage rises too high.

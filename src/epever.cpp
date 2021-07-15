@@ -237,8 +237,6 @@ float epever::getLoadPower() const {
             clean_and_throw_error();
         }
     }
-    float epever::getLVDwarningTimeout() const {return 0;}
-    void epever::setLVDwarningTimeout(float v)  {}
 
     float epever::getArrayCurrent() const {
         uint16_t dest[1];
