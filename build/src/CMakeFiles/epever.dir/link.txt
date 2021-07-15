@@ -1,2 +1,0 @@
-/usr/bin/ar qc libepever.a  CMakeFiles/epever.dir/epever.cpp.o
-/usr/bin/ranlib libepever.a

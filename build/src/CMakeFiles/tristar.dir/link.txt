@@ -1,2 +1,0 @@
-/usr/bin/ar qc libtristar.a  CMakeFiles/tristar.dir/tristar.cpp.o
-/usr/bin/ranlib libtristar.a
