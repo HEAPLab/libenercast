@@ -92,7 +92,7 @@ public:
 
     /**
      * Battery information.
-     * @param en an int between 0 and 10. Use enum batteryStatus_t to set which information you want to check. 
+     * @param en an int between 0 and 10. Use enum chargingEquipmentStatus_t to set which information you want to check. 
      */
     bool getBatteryStatus(int en) const;
 
