@@ -95,13 +95,51 @@ public:
      * @param en an int between 0 and 10. Use enum batteryStatus_t to set which information you want to check. 
      */
     bool getBatteryStatus(int en) const;
+
+    /**
+     * Battery information, returns bitset, each bit or set of bits corresponds to a specific information.
+     * @return Bitset. 
+     * D15: 1-Wrong identification for rated voltage
+     * D8: Battery inner resistance abnormal 1, normal 0
+     * D7-D4: 00H Normal, 01H Over Temp.(Higher than the warning settings), 02H Low Temp.(Lower than the warning settings),
+     * D3-D0: 00H Normal ,01H Over Voltage. , 02H Under Voltage, 03H Over discharge, 04H Fault
+     */
     std::bitset<16> getBatteryStatus() const;
+
+
+    /**
+     * Charging equipment information.
+     * @param en an int between 0 and 17. Use enum batteryStatus_t to set which information you want to check. 
+     */
     bool getChargingEquipmentStatus(int en) const;
+
+    /**
+     * Battery information, returns bitset, each bit or set of bits corresponds to a specific information.
+     * @return Bitset. 
+     * D15-D14: Input voltage status. 00H normal, 01H No input power connected, 02H Higher input voltage , 03H Input voltage error.
+     * D13: Charging MOSFET is short circuit.
+     * D12: Charging or Anti-reverse MOSFET is open circuit.
+     * D11: Anti-reverse MOSFET is short circuit.
+     * D10: Input is over current.
+     * D9: The load is over current.
+     * D8: The load is short circuit.
+     * D7: Load MOSFET is short circuit.
+     * D6:Disequilibrium in three circuits.
+     * D4: PV input is short circuit.
+     * D3-D2: Charging status. 00H No charging,01H Float,02H Boost, 03H Equalization.
+     * D1: 0 Normal, 1 Fault.
+     * D0: 1 Running, 0 Standby.
+     */
     std::bitset<16> getChargingEquipmentStatus() const;
     virtual float getLoadCurrent() const override;
     virtual float getLoadVoltage() const override;
     float getLoadPower() const;
-    bool getLoadStatus(int en) const; 
+
+    /**
+     * Disharging equipment information.
+     * @param en an int between 0 and 17. Use enum batteryStatus_t to set which information you want to check. 
+     */
+    bool getDischargingEquipmentStatus(int en) const; 
     virtual float getHeatsinkTemp() const override;
     // ? realTimeClock() const;
 

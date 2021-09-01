@@ -237,7 +237,7 @@ float epever::getLoadPower() const {
         INPUT_VOLTAGE_HIGH=16,
         NO_ACCESS=17,*/
 
- bool epever::getLoadStatus(int en) const {
+ bool epever::getDischargingEquipmentStatus(int en) const {
         uint16_t dest;
         bool result;
         //uint16_t dest[1];

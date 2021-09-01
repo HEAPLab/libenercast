@@ -101,7 +101,7 @@ int main(int argc, char const *argv[])
 
     std::cout<<"Max battery voltage today: "<<deviceE->maxBatteryVoltageToday()<<std::endl;
 
-    if(deviceE->getLoadStatus(deviceE->LOAD_ON))std::cout<<"LOAD ON"<<std::endl;
+    if(deviceE->getDischargingEquipmentStatus(deviceE->LOAD_ON))std::cout<<"LOAD ON"<<std::endl;
 
     if(deviceE->getChargingEquipmentStatus(deviceE->IS_CHARGING))std::cout<<"Charging normal"<<std::endl;
     
