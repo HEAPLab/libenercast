@@ -74,16 +74,7 @@ float epever::getLoadPower() const {
             return result;
     }
 }
-
-    float epever::getLoadStatus() const {
-        uint16_t dest[1];
-        //modbus_set_debug(ctx,TRUE);
-        if(modbus_read_input_registers(ctx, 0x3202, 1, dest)==-1){ 
-            clean_and_throw_error();
-        }else{
-            return dest[0];  //risultato dipende dal bit correggere return
-    }
-}
+   
     float epever::getChargeCurrent() const {
         uint16_t dest[1];
         //modbus_set_debug(ctx,TRUE);
@@ -110,26 +101,230 @@ float epever::getLoadPower() const {
         }else{
             uint32_t result = (dest[0]<<16)+dest[1];
             return result; 
-    }
-    }
-    float epever::getArrayStatus() const {
-        uint16_t dest[1];
-        //modbus_set_debug(ctx,TRUE);
-        if(modbus_read_input_registers(ctx, 0x3201, 1, dest)==-1){ 
-            clean_and_throw_error();
-        }else{
-            return dest[0]; //Va selezionato il bit,correggere 
         }
     }
-    float epever::deviceStatus() const {
-        uint16_t dest[1];
+     std::bitset<16> epever::getChargingEquipmentStatus() const {
+        uint16_t dest;
         //modbus_set_debug(ctx,TRUE);
-        if(modbus_read_input_registers(ctx, 0x3201, 1, dest)==-1){
+        if(modbus_read_input_registers(ctx, 0x3202, 1, &dest)==-1){ 
+            clean_and_throw_error();
+        }else{ 
+             std::bitset<16> result=dest; 
+            return result;
+    }
+}
+  /*RUNNING=0,
+        DEV_FAULT=1,
+        IS_CHARGING=2,
+        FLOAT=3,       //float charging
+        BOOST=4,       //boost charging mode
+        EQUALIZE=5,    //equalize charging mode
+        PV_IN_SHORT=6, //pv input is short circuit
+        LOAD_MOS_SHORT=7,
+        LOAD_SHORT=8,
+        LOAD_OVER_CURRENT=9
+        INPUT_OVER_CURRENT=10,
+        ANTIREVERSE_MOS_SHORT=11,
+        CHARGE_MOS_OPEN=12,
+        CHARGE_MOS_SHRT=13
+        INPUT_V_NORMAL=14,
+        NO_INPUT_POWER=15,
+        HIGHER_INPUT_VOLTAGE=16,
+        INPUT_VOLTAGE_ERROR=17,*/
+    bool epever::getChargingEquipmentStatus(int en) const {
+        uint16_t dest;
+        bool result;
+        //modbus_set_debug(ctx,TRUE);
+        if(modbus_read_input_registers(ctx, 0x3201, 1, &dest)==-1){
             clean_and_throw_error();
         }else{
-            return dest[0]; //Va selezionato il bit,correggere 
+             std::bitset<16> set=dest; //enum?
+            switch (en)
+            {
+            case 0:
+                result=set.test(0);
+                return result;
+                break;
+            case 1:
+                result=set.test(1);
+                return result;
+                break;    
+            case 2:
+                result=(!set.test(2))&&(!set.test(3));
+                return result;
+                break;
+            case 3:
+                result=(!set.test(2))&&(set.test(3));
+                return result;
+                break;
+            case 4:
+                result=(set.test(2))&&(!set.test(3));
+                return result;
+                break;
+            case 5:
+                result=(set.test(2))&&(set.test(3));
+                return result;
+                break;
+            case 6:
+                result=set.test(4);
+                return result;
+                break;
+            case 7:
+                result=set.test(7);
+                return result;
+                break;
+            case 8:
+                result=set.test(8);
+                return result;
+                break;
+            case 9:
+                result=set.test(9);
+                return result;
+                break;
+            case 10:
+                result=set.test(10);
+                return result;
+                break;
+            case 11:
+                result=set.test(11);
+                return result;
+                break;
+            case 12:
+                result=set.test(12);
+                return result;
+                break;
+            case 13:
+                result=set.test(13);
+                return result;
+                break;
+            case 14:
+                result=(!set.test(14))&&(!set.test(15));
+                return result;
+                break;
+            case 15:
+                result=(!set.test(14))&&(set.test(15));
+                return result;
+                break;
+            case 16:
+                result=(set.test(14))&&(!set.test(15));
+                return result;
+                break;
+            case 17:
+                result=(set.test(14))&&(set.test(15));
+                return result;
+                break;
+            default:
+                break;
+            }
         }
     }
+    /*RUNNING=0,
+        FAULT=1,
+        OUTPUT_OVER_VOLTAGE=2,
+        OUTPUT_OVER_VOLTAGE=3,       
+        SHORT_HIGH_VOLTAGE=4,       
+        INPUT_OVER_VOLTAGE=5,    
+        OUTPUT_VOLTAGE_ABNORMAL=6, 
+        UNABLE_STOP_DISCHARGING=7,
+        UNABLE_DISCHARGE=8,
+        SHORT_CIRCUIT=9,
+        OUT_PW_LIGHT_LOAD=10,
+        OUT_PW_MODERATE=11,
+        OUT_PW_RATED=12,
+        OUT_PW_OVERLOAD=13,
+        INPUT_V_NORMAL=14,
+        INPUT_VOLTAGE_LOW=15,
+        INPUT_VOLTAGE_HIGH=16,
+        NO_ACCESS=17,*/
+
+ bool epever::getLoadStatus(int en) const {
+        uint16_t dest;
+        bool result;
+        //uint16_t dest[1];
+        //modbus_set_debug(ctx,TRUE);
+        if(modbus_read_input_registers(ctx, 0x3202, 1, &dest)==-1){ 
+            clean_and_throw_error();
+        }else{ 
+             std::bitset<16> set=dest; 
+             switch (en)
+            {
+            case 0:
+                result=set.test(0);
+                return result;
+                break;
+            case 1:
+                result=set.test(1);
+                return result;
+                break;    
+            case 2:
+                result=set.test(4);
+                return result;
+                break;
+            case 3:
+                result=set.test(5);
+                return result;
+                break;
+            case 4:
+                result=set.test(6);
+                return result;
+                break;
+            case 5:
+                result=set.test(7);
+                return result;
+                break;
+            case 6:
+                result=set.test(8);
+                return result;
+                break;
+            case 7:
+                result=set.test(9);
+                return result;
+                break;
+            case 8:
+                result=set.test(10);
+                return result;
+                break;
+            case 9:
+                result=set.test(11);
+                return result;
+                break;
+            case 10:
+                result=(!set.test(12))&&(!set.test(13));
+                return result;
+                break;
+            case 11:
+                result=(!set.test(12))&&(set.test(13));
+                return result;
+                break;
+            case 12:
+                result=(set.test(12))&&(!set.test(13));
+                return result;
+                break;
+            case 13:
+                result=(set.test(12))&&(set.test(13));
+                return result;
+                break;
+            case 14:
+                result=(!set.test(14))&&(!set.test(15));
+                return result;
+                break;
+            case 15:
+                result=(!set.test(14))&&(set.test(15));
+                return result;
+                break;
+            case 16:
+                result=(set.test(14))&&(!set.test(15));
+                return result;
+                break;
+            case 17:
+                result=(set.test(14))&&(set.test(15));
+                return result;
+                break;
+            default:
+                break;
+            }
+    }
+}
     float epever::getHeatsinkTemp() const {
         uint16_t dest[1];
         //modbus_set_debug(ctx,TRUE);
@@ -256,25 +451,90 @@ float epever::getLoadPower() const {
             return dest[0];
         }
     }
-    float epever::getBateryStatus() const {
-        uint16_t dest[1];
+    std::bitset<16> epever::getBatteryStatus() const {
+        uint16_t dest;
         //modbus_set_debug(ctx,TRUE);
-        if(modbus_read_input_registers(ctx, 0x3200, 1, dest)==-1){
+        if(modbus_read_input_registers(ctx, 0x3200, 1, &dest)==-1){ 
+            clean_and_throw_error();
+        }else{ 
+             std::bitset<16> result=dest; 
+            return result;
+    }
+}
+    //VOLTAGE_FAULT=1
+    //UNDER_VOLTAGE=2
+    //OVER_VOLTAGE=3
+    //OVER_DISCHARGE=4
+    //VOLTAGE_NORMAL=5
+    //TEMP_OK=6
+    //OVER_TEMP=7
+    //UNDER_TEMP=8
+    //BATTERY_RESISTANCE_FAULT=9
+    //WRONG_IDENTIFICATION_RATED_V=10
+    //ALL_OK=11
+    bool epever::getBatteryStatus(int en) const {
+        uint16_t dest;
+        bool result;
+        //modbus_set_debug(ctx,TRUE);
+        if(modbus_read_input_registers(ctx, 0x3200, 1, &dest)==-1){
             clean_and_throw_error();
         }else{
-            return dest[0]; //dipende dal bit
+             std::bitset<16> set=dest; //enum?
+            switch (en)
+            {
+            case 0:
+                result= set.test(2)&&(!set.test(1))&&(!set.test(0));
+                return result;
+                break;
+            case 1:
+                result= set.test(1)&&(!set.test(0));
+                return result;
+                break;
+            case 2:
+                result= (!set.test(1))&&set.test(0);
+                return result;
+                break;
+            case 3:
+                result= set.test(1)&&set.test(0);
+                return result;
+                break;
+            case 4:
+                result= (!set.test(1))&&(!set.test(0));
+                return result;
+                break;
+            case 5:
+                result= (!set.test(4))&&(!set.test(5));
+                return result;
+                break;
+            case 6:
+                result= set.test(4)&&(!set.test(5));
+                return result;
+                break;
+            case 7:
+                result= (!set.test(4))&&set.test(5);
+                return result;
+                break;
+            case 8:
+                result= set.test(8);
+                return result;
+                break;
+            case 9:
+                result= set.test(15);
+                return result;
+                break;
+            case 10:
+                result= set.none();
+                return result;
+                break;
+            
+            default:
+                break;
+            }
+            //D3-D0: 00H Normal ,01H Over Voltage. , 02H Under Voltage, 03H Over discharge, 04H Fault
         }
     }
     
-    float epever::getChargingStatus() const {
-        uint16_t dest[1];
-        //modbus_set_debug(ctx,TRUE);
-        if(modbus_read_input_registers(ctx, 0x3201, 1, dest)==-1){
-            clean_and_throw_error();
-        }else{
-            return dest[0]; //dipende dal bit
-        }
-    }
+    
 
     float epever::getBatteryCapacity() const{
         uint16_t dest[1];
