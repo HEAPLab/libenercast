@@ -1,4 +1,4 @@
-#include <iostream>
+#include <stdexcept>
 #include "tristar.h"
 
 #define BAUD 9600
@@ -10,11 +10,14 @@ tristar::tristar(const std::string &device)
 {
     ctx= modbus_new_rtu(device.c_str(), BAUD, PARITY, DATA_BIT, STOP_BIT);
     if (ctx == NULL) {
-        std::cout << "Unable to create the libmodbus context" << std::endl;
+        throw std::runtime_error("Unable to create the libmodbus context");
     }
     modbus_set_slave(ctx, 1);
     modbus_rtu_set_serial_mode(ctx,MODBUS_RTU_RS232);
-    modbus_connect(ctx);
+    if (modbus_connect(ctx) == -1) {
+        modbus_free(ctx);
+        throw std::runtime_error("Connection failed.");
+    }
 }
 
 tristar::~tristar()

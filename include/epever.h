@@ -92,9 +92,9 @@ public:
 
     /**
      * Battery information.
-     * @param en an int between 0 and 10. Use enum chargingEquipmentStatus_t to set which information you want to check. 
+     * @param en enum batteryStatus_t
      */
-    bool getBatteryStatus(int en) const;
+    bool getBatteryStatus(batteryStatus_t en) const;
 
     /**
      * Battery information, returns bitset, each bit or set of bits corresponds to a specific information.
@@ -109,9 +109,9 @@ public:
 
     /**
      * Charging equipment information.
-     * @param en an int between 0 and 17. Use enum batteryStatus_t to set which information you want to check. 
+     * @param en enum chargingEquipmentStatus_t 
      */
-    bool getChargingEquipmentStatus(int en) const;
+    bool getChargingEquipmentStatus(chargingEquipmentStatus_t en) const;
 
     /**
      * Battery information, returns bitset, each bit or set of bits corresponds to a specific information.
@@ -137,9 +137,9 @@ public:
 
     /**
      * Disharging equipment information.
-     * @param en an int between 0 and 17. Use enum batteryStatus_t to set which information you want to check. 
+     * @param en enum dischargingEquipmentStatus_t 
      */
-    bool getDischargingEquipmentStatus(int en) const; 
+    bool getDischargingEquipmentStatus(dischargingEquipmentStatus_t en) const; 
     virtual float getHeatsinkTemp() const override;
     // ? realTimeClock() const;
 
@@ -215,16 +215,4 @@ public:
     void RestoreSystemDefaults();
     void loadTestModeOn();
     void loadTestModeOff();
-
-
-
-
-    
-    
-
-
-
-
-
-
 };

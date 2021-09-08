@@ -4,6 +4,10 @@
 #include "chargeController.h"
 
 
+/**
+ * Class for TriStar TS-45. 
+ * Class for the Mppt solar charge controller.
+ */
 class tristar : public chargeController{
 private:
     modbus_t *ctx;
