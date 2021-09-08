@@ -12,6 +12,17 @@ The library is written in C++ and designed to run on Linux.
 ### Prerequisites
 Downolad and installation of libmodbus at  https://github.com/stephane/libmodbus is required.
 ### Installation
+Download the library then in your command line run the following commands:
+```
+mkdir build
+cd build
+cmake ..
+make
+```
+Then for example run the test program
+```
+./test/testEpever
+```
 
 ## Documentation
 The documentation is available at
