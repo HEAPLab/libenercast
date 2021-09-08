@@ -47,7 +47,7 @@ jobs:
           cmake --version
           gcc --version
           
-        - name: Install dependencies on ubuntu
+        - name: Install libmodbus
         run: |
         sudo apt-get install libmodbus
       
