@@ -25,7 +25,10 @@ Then for example run the test program
 ```
 
 ## Documentation
-The documentation is available at
+To generate the documentation downolad Doxygen and run command
+```
+doxygen Doxyfile
+```
 
 ## Try to run 
 For a quick test of libmodbus, you can run the following programs:
