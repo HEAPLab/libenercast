@@ -47,7 +47,7 @@ jobs:
           gcc --version 
        
       - name: Install libmodbus
-        run: sudo apt-get install libmodbus     
+        run: sudo apt-get install libmodbus-dev     
                 
       - name: Configure
         shell: bash
