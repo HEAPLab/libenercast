@@ -46,6 +46,10 @@ jobs:
           ninja --version
           cmake --version
           gcc --version
+          
+        - name: Install dependencies on ubuntu
+        run: |
+        sudo apt-get install libmodbus
       
           
       - name: Configure
