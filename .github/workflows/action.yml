@@ -45,9 +45,8 @@ jobs:
           sudo apt-get install ninja-build cmake
           ninja --version
           cmake --version
-          gcc --version
-          
-        - name: Install libmodbus
+          gcc --version 
+      - name: Install libmodbus
         run: |
         sudo apt-get install libmodbus
       
