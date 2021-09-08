@@ -28,7 +28,6 @@ jobs:
             generators: "Ninja"
           }
        
-
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
@@ -46,10 +45,7 @@ jobs:
           ninja --version
           cmake --version
           gcc --version 
-      - name: Install libmodbus
-        if: startsWith(matrix.config.name, 'Ubuntu Latest GCC')
-        run: |
-        sudo apt-get install libmodbus
+     
                 
       - name: Configure
         shell: bash
