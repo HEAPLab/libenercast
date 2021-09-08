@@ -45,10 +45,10 @@ jobs:
           ninja --version
           cmake --version
           gcc --version 
-       - name: Install libmodbus
-          run: |
-            sudo apt-get install libmodbus
-     
+       
+      - name: Install libmodbus
+        run: |
+          sudo apt-get install libmodbus     
                 
       - name: Configure
         shell: bash
