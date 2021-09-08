@@ -32,7 +32,7 @@ Some tests are provided in tests directory.
 For a quick test of libmodbus, you can run the following programs:
 ```
 ./testEpever
-./testMorningstar
+./testTriStar
 ```
 Remember to change the path to your devices.
 
