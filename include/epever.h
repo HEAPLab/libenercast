@@ -4,7 +4,7 @@
 #include "chargeController.h"
 
 /**
- * Epever class. 
+ * Class for epever MPPT Tracer1210AN. 
  * Class for the Mppt solar charge controller.
  */
 class epever : public chargeController{
