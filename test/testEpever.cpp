@@ -25,8 +25,6 @@ int main(int argc, char const *argv[])
     if(deviceE->getBatteryStatus(deviceE->VOLTAGE_NORMAL))std::cout<<"Battery voltage ok"<<std::endl;
     if(deviceE->getBatteryStatus(deviceE->OVER_VOLTAGE))std::cout<<"Battery over voltage"<<std::endl;
     if(deviceE->getBatteryStatus(deviceE->UNDER_VOLTAGE))std::cout<<"Battery under voltage"<<std::endl;
-
-
-    
+        
     return 0;
 }
