@@ -47,10 +47,10 @@ jobs:
           cmake --version
           gcc --version 
       - name: Install libmodbus
+        if: startsWith(matrix.config.name, 'Ubuntu Latest GCC')
         run: |
         sudo apt-get install libmodbus
-      
-          
+                
       - name: Configure
         shell: bash
         run: |
