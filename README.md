@@ -1,5 +1,4 @@
 # Enercastlib
-## About
 Enercastlib is a library to communicate with charge controllers:
 - EPEVER MPPT Tracer1210AN
 - Morningstar TS-45
