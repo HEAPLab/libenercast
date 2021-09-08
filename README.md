@@ -27,12 +27,11 @@ Then for example run the test program
 ## Documentation
 The documentation is available at
 
-## Testing
-Some tests are provided in tests directory. 
+## Try to run 
 For a quick test of libmodbus, you can run the following programs:
 ```
-./testEpever
-./testTriStar
+./test/testEpever
+./test/testTriStar
 ```
 Remember to change the path to your devices.
 
