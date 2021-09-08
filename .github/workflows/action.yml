@@ -28,7 +28,6 @@ jobs:
             generators: "Ninja"
           }
        
-
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
@@ -45,13 +44,11 @@ jobs:
           sudo apt-get install ninja-build cmake
           ninja --version
           cmake --version
-          gcc --version
-          
-        - name: Install dependencies on ubuntu
-        run: |
-        sudo apt-get install libmodbus
-      
-          
+          gcc --version 
+       
+      - name: Install libmodbus
+        run: sudo apt-get install libmodbus-dev     
+                
       - name: Configure
         shell: bash
         run: |
