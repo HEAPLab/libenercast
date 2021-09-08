@@ -13,6 +13,9 @@ int main(int argc, char const *argv[])
     
     std::bitset<16> fault = device->getFault();
     std::cout<<"fault bits:"<<fault.to_string()<<std::endl;
+    if (fault.none){
+        std::cout<<"no faults"<<std::endl;
+    }
    
     /*//check if fault bit for high voltage disconnect is on
     if(fault.test(device->HVD)){
