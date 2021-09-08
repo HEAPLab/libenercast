@@ -13,7 +13,7 @@ int main(int argc, char const *argv[])
     
     std::bitset<16> fault = device->getFault();
     std::cout<<"fault bits:"<<fault.to_string()<<std::endl;
-    if (fault.none){
+    if (fault.none()){
         std::cout<<"No faults"<<std::endl;
     }
    
