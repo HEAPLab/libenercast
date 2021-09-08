@@ -25,7 +25,7 @@ int main(int argc, char const *argv[])
     fault = device->getFault();
     std::cout<<"fault bits:"<<fault.to_string()<<std::endl;*/
 
-    /*float hourmeter = device->getHourmeter();
+    float hourmeter = device->getHourmeter();
     std::cout<<"hourmeter: "<<hourmeter<<std::endl;
 
     float solarCurrent = device->getChargeCurrent();
@@ -42,9 +42,6 @@ int main(int argc, char const *argv[])
 
     int regulationVoltage = device->getRegulationVoltage();
     std::cout<<"Regulation/Target voltage: "<<regulationVoltage<<std::endl;
-
-    int fault = device->getFault();
-    std::cout<<"fault: "<<fault<<std::endl;
 
     int alarm = device->getAlarmLo();
     std::cout<<"alarm: "<<alarm<<std::endl;
@@ -69,8 +66,6 @@ int main(int argc, char const *argv[])
     float controlMode = device->getControlMode();
     std::cout<<"control mode: "<<controlMode<<std::endl; 
 
-    float controlState = device->getControlState();
-    std::cout<<"control State: "<<controlState<<std::endl;*/
 
     return 0;
 }

@@ -5,6 +5,8 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "/usr/include/modbus",
+                "${workspaceFolder}/include",
+                "${workspaceFolder}/include",
                 "${workspaceFolder}/include"
             ],
             "defines": [],

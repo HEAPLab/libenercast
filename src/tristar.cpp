@@ -229,7 +229,7 @@ float tristar::getLoadVoltage() const {
     float tristar::getControlState() const {
           uint16_t dest[1];
     //modbus_set_debug(ctx,TRUE);
-    if(modbus_read_input_registers(ctx, 0x001B, 1, dest)==-1){ //Depends on control mode!!
+    if(modbus_read_input_registers(ctx, 0x001B, 1, dest)==-1){ 
         clean_and_throw_error();
     }else{
         return dest[0];
