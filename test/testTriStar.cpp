@@ -13,12 +13,14 @@ int main(int argc, char const *argv[])
     
     std::bitset<16> fault = device->getFault();
     std::cout<<"fault bits:"<<fault.to_string()<<std::endl;
+   
+    /*//check if fault bit for high voltage disconnect is on
     if(fault.test(device->HVD)){
         std::cout<<"fault HVD"<<std::endl;
     }
     device->clearFaults();
     fault = device->getFault();
-    std::cout<<"fault bits:"<<fault.to_string()<<std::endl;
+    std::cout<<"fault bits:"<<fault.to_string()<<std::endl;*/
 
     /*float hourmeter = device->getHourmeter();
     std::cout<<"hourmeter: "<<hourmeter<<std::endl;
@@ -61,56 +63,11 @@ int main(int argc, char const *argv[])
     float maxBatteryV = device->maxBatteryVoltageToday();
     std::cout<<"Max Battery Voltage Today : "<<maxBatteryV<<std::endl;
 
-    device->clearFaults();
-    int fault = device->getFault();
-    std::cout<<"fault: "<<fault<<std::endl;
-
     float controlMode = device->getControlMode();
     std::cout<<"control mode: "<<controlMode<<std::endl; 
 
-
     float controlState = device->getControlState();
-    std::cout<<"control State: "<<controlState<<std::endl;
-    
-    device->disconnect(); 
-    std::cout<<"disconnected"<<std::endl;
-
-    battVoltage = device->getBatteryVoltage();
-    std::cout<<"battery Voltage Tristar: "<<battVoltage<<std::endl;
-    controlState = device->getControlState();
-    std::cout<<"control State: "<<controlState<<std::endl;
-    
-    device->reconnect();
-    std::cout<<"reconnected"<<std::endl;
-
-    controlState = device->getControlState();
     std::cout<<"control State: "<<controlState<<std::endl;*/
-    
-    
-    //-----epever
-    std::cout<<std::endl;
-    std::cout<<"Epever:"<<std::endl;
 
-    epever *deviceE = new epever("/dev/ttyXRUSB0");
-
-    float battVoltageE = deviceE->getBatteryVoltage();
-    std::cout<<"Battery Voltage: "<<battVoltageE<<std::endl;
-
-    float loadCurrentE = deviceE->getLoadCurrent();
-    std::cout<<"Load current: "<<loadCurrentE<<std::endl;
-
-    std::cout<<"Max battery voltage today: "<<deviceE->maxBatteryVoltageToday()<<std::endl;
-
-    if(deviceE->getDischargingEquipmentStatus(deviceE->LOAD_ON))std::cout<<"LOAD ON"<<std::endl;
-
-    if(deviceE->getChargingEquipmentStatus(deviceE->IS_CHARGING))std::cout<<"Charging normal"<<std::endl;
-    
-    if(deviceE->getBatteryStatus(deviceE->ALL_OK))std::cout<<"Battery Status OK"<<std::endl;    
-    if(deviceE->getBatteryStatus(deviceE->VOLTAGE_NORMAL))std::cout<<"Battery voltage ok"<<std::endl;
-    if(deviceE->getBatteryStatus(deviceE->OVER_VOLTAGE))std::cout<<"Battery over voltage"<<std::endl;
-    if(deviceE->getBatteryStatus(deviceE->UNDER_VOLTAGE))std::cout<<"Battery under voltage"<<std::endl;
-
-
-    
     return 0;
 }
